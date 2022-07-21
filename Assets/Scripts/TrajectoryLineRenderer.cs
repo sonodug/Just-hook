@@ -1,53 +1,132 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TrajectoryLineRenderer : MonoBehaviour
 {
     [SerializeField] private LineRenderer _lineRenderer;
-    [SerializeField] private GrapplingRope _grapplingRope;
-    [SerializeField] private GrapplingHook _grapplingHook;
-    [SerializeField] private float _maxDistance = 5;
+    [SerializeField] private float _maxDistance;
+    [SerializeField] private LayerMask _layerMask;
 
-    private Vector3 _startPosition;
-    private Vector3 _endPosition;
-    private Vector3 _mousePosition;
-    private Vector3 _mouseDirection;
+    [SerializeField] private int _accuracy = 100;
 
     private Camera _camera;
+
+    private RaycastHit2D _hit;
+
+    private Vector3[] _points;
+
+    private Vector3 _targetPosition;
+
+    public Vector2 JointVector => _targetPosition - transform.position;
 
     private void Start()
     {
         _camera = Camera.main;
         _lineRenderer.enabled = false;
+
+        //SetSegments();
     }
 
-    private void Update()
+    public void DrawStraightTrajectory(Vector3 startPosition, GrapplingRope grapplingRope)
     {
-        _startPosition = transform.root.position;
-        _startPosition.z = 0;
-        _mousePosition = _camera.ScreenToWorldPoint(Input.mousePosition);
-        _mouseDirection = _mousePosition - transform.root.position;
-        _mouseDirection.z = 0;
-        _mouseDirection = _mouseDirection.normalized;
+        startPosition.z = 0;
+
+        _targetPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+        _targetPosition.z = 0;
 
         //Условие по рейкасту на платформу + isGrappling
-        if (!_grapplingRope.enabled)
+        if (!grapplingRope.enabled)
         {
-            _lineRenderer.enabled = true;
+            _hit = Physics2D.Raycast(transform.position, JointVector.normalized);
 
-            _lineRenderer.SetPosition(0, _startPosition);
-            _endPosition = _mousePosition;
-            _endPosition.z = 0;
+            if (_hit)
+            {
+                _lineRenderer.enabled = true;
 
-            float capLength = Mathf.Clamp(Vector2.Distance(_startPosition, _endPosition), 0, _maxDistance);
-            _endPosition = _startPosition + (_mouseDirection * capLength);
-            _lineRenderer.SetPosition(1, _endPosition);
+                Color setColor = GetPlatformTypeColor(_hit);
+                _lineRenderer.startColor = setColor;
+                _lineRenderer.endColor = setColor;
+                
 
+                _lineRenderer.SetPosition(0, startPosition);
+
+                _lineRenderer.SetPosition(1, _hit.point);
+            }
+            else
+            {
+                _lineRenderer.enabled = false;
+            }
         }
         else
         {
             _lineRenderer.enabled = false;
+        }
+    }
+
+    public void DrawSegmentedTrajectory(Vector3 startPosition, GrapplingRope grapplingRope)
+    {
+        Vector3 targetPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
+        targetPosition.z = 0;
+
+        if (!grapplingRope.enabled)
+        {
+            _hit = Physics2D.Raycast(transform.position, JointVector.normalized);
+            Vector3 speed = (_hit.point - (Vector2)startPosition) * 100;
+
+            if (_hit)
+            {
+                _lineRenderer.enabled = true;
+
+                for (int i = 0; i < _points.Length; i++)
+                {
+                    float time = i * 0.1f;
+
+                    _points[i] = startPosition + speed * time;
+                    _points[i].z = 0;
+                }
+
+                _lineRenderer.SetPositions(_points);
+            }
+            else
+            {
+                _lineRenderer.enabled = false;
+            }
+        }
+        else
+        {
+            _lineRenderer.enabled = false;
+        }
+    }
+
+    private void SetSegments()
+    {
+        _points = new Vector3[_accuracy];
+        _lineRenderer.positionCount = _points.Length;
+    }
+
+    private Color GetPlatformTypeColor(RaycastHit2D hit)
+    {
+        if (hit.collider.TryGetComponent<AttractingPlatform>(out AttractingPlatform attractingPlatform))
+        {
+            return Color.blue;
+        }
+        else if (hit.collider.TryGetComponent<WaveringPlatform>(out WaveringPlatform waveringPlatform))
+        {
+            return Color.red;
+        }
+        else if (hit.collider.TryGetComponent<BouncePlatform>(out BouncePlatform bouncePlatform))
+        {
+            return Color.yellow;
+        }
+        else if (hit.collider.TryGetComponent<TransporterPlatform>(out TransporterPlatform transporterPlatform))
+        {
+            return Color.green;
+        }
+        else
+        {
+            return Color.white;
         }
     }
 }

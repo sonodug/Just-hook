@@ -1,9 +1,12 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GrapplingHook : MonoBehaviour
 {
     [Header("Scripts Reference:")]
-    [SerializeField] private GrapplingRope _grappleRope;
+    [SerializeField] private GrapplingRope _grapplingRope;
+    [SerializeField] private TrajectoryLineRenderer _trajectoryRenderer;
+    [SerializeField] private PlatformTracker _platformTracker;
 
     [Header("Layers Settings:")]
     [SerializeField] private bool _grappleToAll = false;
@@ -27,6 +30,7 @@ public class GrapplingHook : MonoBehaviour
     [SerializeField] private bool _autoConfigureDistance = false;
     [SerializeField] private float _targetDistance = 3;
     [SerializeField] private float _targetFrequncy = 1;
+
 
     private enum LaunchType
     {
@@ -58,20 +62,22 @@ public class GrapplingHook : MonoBehaviour
         _springJoint2D = GetComponentInParent<Player>().GetComponent<SpringJoint2D>();
         _rigidbody = GetComponentInParent<Player>().GetComponent<Rigidbody2D>();
 
-        _grappleRope.enabled = false;
+        _grapplingRope.enabled = false;
         _springJoint2D.enabled = false;
 
     }
 
     private void Update()
     {
+        _trajectoryRenderer.DrawStraightTrajectory(transform.position, _grapplingRope);
+
         if (Input.GetMouseButtonDown(0))
         {
             SetGrapplePoint();
         }
         else if (Input.GetMouseButton(0))
         {
-            if (_grappleRope.enabled)
+            if (_grapplingRope.enabled)
             {
                 RotateGun(GrapplePoint, false);
             }
@@ -81,7 +87,7 @@ public class GrapplingHook : MonoBehaviour
                 RotateGun(mousePos, true);
             }
 
-            if (_isLaunchToPoint && _grappleRope.IsGrappling)
+            if (_isLaunchToPoint && _grapplingRope.IsGrappling)
             {
                 if (_launchType == LaunchType.Transform_Launch)
                 {
@@ -93,7 +99,7 @@ public class GrapplingHook : MonoBehaviour
         }
         else if (Input.GetMouseButtonUp(0))
         {
-            _grappleRope.enabled = false;
+            _grapplingRope.enabled = false;
             _springJoint2D.enabled = false;
             _rigidbody.gravityScale = 1;
         }
@@ -131,6 +137,8 @@ public class GrapplingHook : MonoBehaviour
 
                 if (_hitAll)
                 {
+                    //Событие на изменение типа платформы, Player подписывается и меняет hook, есть переменные currentType, tempType, если currentType изменилась и не равна tempType, то вызвать событие
+                    _platformTracker.Track(_hitAll);
                     CalculateGrapplePoint(_hitAll);
                 }
             }
@@ -140,6 +148,7 @@ public class GrapplingHook : MonoBehaviour
 
                 if (_hitLayer)
                 {
+                    _platformTracker.Track(_hitLayer);
                     CalculateGrapplePoint(_hitLayer);
                 }
             }
@@ -150,7 +159,7 @@ public class GrapplingHook : MonoBehaviour
     {
         GrapplePoint = _hit.point;
         GrappleDistanceVector = GrapplePoint - (Vector2)_gunPivot.position;
-        _grappleRope.enabled = true;
+        _grapplingRope.enabled = true;
     }
 
     public void Grapple()
@@ -204,5 +213,4 @@ public class GrapplingHook : MonoBehaviour
             Gizmos.DrawWireSphere(_shotPoint.position, _maxDistance);
         }
     }
-
 }

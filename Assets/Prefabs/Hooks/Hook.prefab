@@ -257,7 +257,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: ca4f28bbc1de89d47b06ec3a54ff9c0e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -289,7 +289,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.15591621
+        value: 0.059663773
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -297,29 +297,29 @@ LineRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.6261917
-        value: 0.08602298
-        inSlope: -0.4153882
-        outSlope: -0.4153882
+        time: 0.55794954
+        value: 0.014611304
+        inSlope: -0.07318334
+        outSlope: -0.07318334
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.18601799
-        outWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 0
-        inSlope: 0
-        outSlope: 0
+        value: 0.005355835
+        inSlope: 0.000039592956
+        outSlope: 0.000039592956
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.15458941
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 0.52643573, g: 1, b: 0.44716978, a: 1}
+      key0: {r: 1, g: 1, b: 1, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -367,9 +367,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lineRenderer: {fileID: 4953984900501563402}
-  _grapplingRope: {fileID: 556047042662857745}
-  _grapplingHook: {fileID: 4077591408794950060}
-  _maxDistance: 5
+  _maxDistance: 20
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
+  _accuracy: 100
 --- !u!1 &5209783624208133649
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,14 +501,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1353a5633d2ebff47b004a9b573d9259, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grappleRope: {fileID: 556047042662857745}
+  _grapplingRope: {fileID: 556047042662857745}
+  _trajectoryRenderer: {fileID: 3237625579684905061}
   _grappleToAll: 0
   _grappableLayer:
     serializedVersion: 2
     m_Bits: 256
   _shotPoint: {fileID: 909893916252431679}
   _isRotateOverTime: 1
-  _rotationSpeed: 15
+  _rotationSpeed: 60
   _maxDistance: 20
   _isLaunchToPoint: 1
   _launchType: 1
