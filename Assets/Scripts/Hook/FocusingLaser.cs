@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class TrajectoryLineRenderer : MonoBehaviour
+public class FocusingLaser : MonoBehaviour
 {
+    [SerializeField] private PlatformTracker _platformTracker;
     [SerializeField] private LineRenderer _lineRenderer;
     [SerializeField] private float _maxDistance;
     [SerializeField] private LayerMask _layerMask;
-
     [SerializeField] private int _accuracy = 100;
 
     private Camera _camera;
@@ -29,6 +29,11 @@ public class TrajectoryLineRenderer : MonoBehaviour
         //SetSegments();
     }
 
+    private void Update()
+    {
+        
+    }
+
     public void DrawStraightTrajectory(Vector3 startPosition, GrapplingRope grapplingRope)
     {
         startPosition.z = 0;
@@ -43,6 +48,8 @@ public class TrajectoryLineRenderer : MonoBehaviour
 
             if (_hit)
             {
+                _platformTracker.Track(_hit);
+
                 _lineRenderer.enabled = true;
 
                 Color setColor = GetPlatformTypeColor(_hit);
@@ -65,7 +72,7 @@ public class TrajectoryLineRenderer : MonoBehaviour
         }
     }
 
-    public void DrawSegmentedTrajectory(Vector3 startPosition, GrapplingRope grapplingRope)
+    public void DrawSegmentedTrajectory(Vector3 startPosition, GrapplingRope grapplingRope) //TRACk 
     {
         Vector3 targetPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         targetPosition.z = 0;
@@ -112,7 +119,7 @@ public class TrajectoryLineRenderer : MonoBehaviour
         {
             return Color.blue;
         }
-        else if (hit.collider.TryGetComponent<WaveringPlatform>(out WaveringPlatform waveringPlatform))
+        else if (hit.collider.TryGetComponent<PhysicsPlatform>(out PhysicsPlatform waveringPlatform))
         {
             return Color.red;
         }

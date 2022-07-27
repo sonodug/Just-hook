@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TransporterPlatform : MonoBehaviour
+public class TransporterPlatform : Platform
 {
     public void ShowMessage()
     {

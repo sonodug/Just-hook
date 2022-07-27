@@ -1,12 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GrapplingHook : MonoBehaviour
+public class HookType : MonoBehaviour //доработать
 {
     [Header("Scripts Reference:")]
-    [SerializeField] private GrapplingRope _grapplingRope;
-    [SerializeField] private TrajectoryLineRenderer _trajectoryRenderer;
-    [SerializeField] private PlatformTracker _platformTracker;
+    [SerializeField] private GrapplingRope _grapplingRope; //ok
 
     [Header("Layers Settings:")]
     [SerializeField] private bool _grappleToAll = false;
@@ -20,10 +19,10 @@ public class GrapplingHook : MonoBehaviour
     [Range(0, 60)][SerializeField] private float _rotationSpeed = 4;
 
     [SerializeField] private float _maxDistance = 20;
+    [SerializeField] private FocusingLaser _focusingLaser;
 
     [Header("Launching:")]
     [SerializeField] private bool _isLaunchToPoint = true;
-    [SerializeField] private LaunchType _launchType = LaunchType.Physics_Launch;
     [SerializeField] private float _launchSpeed = 1;
 
     [Header("No Launch To Point")]
@@ -32,11 +31,13 @@ public class GrapplingHook : MonoBehaviour
     [SerializeField] private float _targetFrequncy = 1;
 
 
-    private enum LaunchType
+    protected enum Launch_Type
     {
         Transform_Launch,
         Physics_Launch
     }
+
+    [SerializeField] protected Launch_Type LaunchType;
 
     private Camera _camera;
 
@@ -57,19 +58,18 @@ public class GrapplingHook : MonoBehaviour
         _camera = Camera.main;
 
         _gunHolder = transform.root;
-        _gunPivot = transform.parent;
+        _gunPivot = transform.parent.parent;
 
         _springJoint2D = GetComponentInParent<Player>().GetComponent<SpringJoint2D>();
         _rigidbody = GetComponentInParent<Player>().GetComponent<Rigidbody2D>();
 
         _grapplingRope.enabled = false;
         _springJoint2D.enabled = false;
-
     }
 
     private void Update()
     {
-        _trajectoryRenderer.DrawStraightTrajectory(transform.position, _grapplingRope);
+        _focusingLaser.DrawStraightTrajectory(transform.position, _grapplingRope);
 
         if (Input.GetMouseButtonDown(0))
         {
@@ -89,7 +89,7 @@ public class GrapplingHook : MonoBehaviour
 
             if (_isLaunchToPoint && _grapplingRope.IsGrappling)
             {
-                if (_launchType == LaunchType.Transform_Launch)
+                if (LaunchType == Launch_Type.Transform_Launch)
                 {
                     Vector2 firePointDistnace = _shotPoint.position - _gunHolder.localPosition;
                     Vector2 targetPos = GrapplePoint - firePointDistnace;
@@ -137,8 +137,6 @@ public class GrapplingHook : MonoBehaviour
 
                 if (_hitAll)
                 {
-                    //Событие на изменение типа платформы, Player подписывается и меняет hook, есть переменные currentType, tempType, если currentType изменилась и не равна tempType, то вызвать событие
-                    _platformTracker.Track(_hitAll);
                     CalculateGrapplePoint(_hitAll);
                 }
             }
@@ -148,7 +146,6 @@ public class GrapplingHook : MonoBehaviour
 
                 if (_hitLayer)
                 {
-                    _platformTracker.Track(_hitLayer);
                     CalculateGrapplePoint(_hitLayer);
                 }
             }
@@ -185,9 +182,9 @@ public class GrapplingHook : MonoBehaviour
         }
         else
         {
-            switch (_launchType)
+            switch (LaunchType)
             {
-                case LaunchType.Physics_Launch:
+                case Launch_Type.Physics_Launch:
                     _springJoint2D.connectedAnchor = GrapplePoint;
 
                     Vector2 distanceVector = _shotPoint.position - _gunHolder.position;
@@ -197,7 +194,7 @@ public class GrapplingHook : MonoBehaviour
                     _springJoint2D.enabled = true;
                     break;
 
-                case LaunchType.Transform_Launch:
+                case Launch_Type.Transform_Launch:
                     _rigidbody.gravityScale = 0;
                     _rigidbody.velocity = Vector2.zero;
                     break;

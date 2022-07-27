@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttractingHook : GrapplingHook
+public class PhysicsHookType : HookType
 {
-    
+
 }

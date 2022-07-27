@@ -4,20 +4,15 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private List<GrapplingHook> _hooks;
+    [SerializeField] private Hook _hook;
     [SerializeField] private Transform _hookPivot;
     [SerializeField] private float _health;
     [SerializeField] private float _hookDamage;
-    [SerializeField] private int _itemCount;
-
-    private PlatformTracker _tracker;
-    private GrapplingHook _currentHook;
+    [SerializeField] private int _priceLevelCount;
 
     private void Awake()
     {
-        _tracker = GetComponent<PlatformTracker>();
-        _currentHook = _hooks[0];
-        Instantiate(_currentHook, _hookPivot);
+        Instantiate(_hook, _hookPivot);
     }
 
     private void Update()

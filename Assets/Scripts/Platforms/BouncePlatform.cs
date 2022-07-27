@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BouncePlatform : MonoBehaviour
+public class BouncePlatform : Platform
 {
     public void ShowMessage()
     {
