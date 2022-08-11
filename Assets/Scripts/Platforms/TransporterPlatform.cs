@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class TransporterPlatform : Platform
 {
-    public void ShowMessage()
+    public override void Accept(IPlatformVisitor visitor)
     {
-        throw new System.NotImplementedException();
+        visitor.Visit(this);
     }
-
 }

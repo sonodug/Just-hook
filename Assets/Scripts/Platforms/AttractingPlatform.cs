@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class AttractingPlatform : Platform
 {
-    public void ShowMessage()
+    public override void Accept(IPlatformVisitor visitor)
     {
-        Debug.Log("StaticPlatform");
+        visitor.Visit(this);
     }
 }

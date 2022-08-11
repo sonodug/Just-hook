@@ -11,21 +11,24 @@ public class FocusingLaser : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private int _accuracy = 100;
 
+    private readonly PlatformToColorMatcherVisitor _platformVisitor = new PlatformToColorMatcherVisitor();
+
     private Camera _camera;
 
     private RaycastHit2D _hit;
 
     private Vector3[] _points;
-
     private Vector3 _targetPosition;
 
     public Vector2 JointVector => _targetPosition - transform.position;
 
     private void Start()
     {
+        _platformVisitor.Init(this);
         _camera = Camera.main;
         _lineRenderer.enabled = false;
 
+        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
         //SetSegments();
     }
 
@@ -52,10 +55,7 @@ public class FocusingLaser : MonoBehaviour
 
                 _lineRenderer.enabled = true;
 
-                Color setColor = GetPlatformTypeColor(_hit);
-                _lineRenderer.startColor = setColor;
-                _lineRenderer.endColor = setColor;
-                
+                //Accept
 
                 _lineRenderer.SetPosition(0, startPosition);
 
@@ -107,33 +107,26 @@ public class FocusingLaser : MonoBehaviour
         }
     }
 
+    private void OnDisable()
+    {
+        _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
+    }
+
     private void SetSegments()
     {
         _points = new Vector3[_accuracy];
         _lineRenderer.positionCount = _points.Length;
     }
 
-    private Color GetPlatformTypeColor(RaycastHit2D hit)
+    private void OnPlatformFocusChanged(Platform platform)
     {
-        if (hit.collider.TryGetComponent<AttractingPlatform>(out AttractingPlatform attractingPlatform))
-        {
-            return Color.blue;
-        }
-        else if (hit.collider.TryGetComponent<PhysicsPlatform>(out PhysicsPlatform waveringPlatform))
-        {
-            return Color.red;
-        }
-        else if (hit.collider.TryGetComponent<BouncePlatform>(out BouncePlatform bouncePlatform))
-        {
-            return Color.yellow;
-        }
-        else if (hit.collider.TryGetComponent<TransporterPlatform>(out TransporterPlatform transporterPlatform))
-        {
-            return Color.green;
-        }
-        else
-        {
-            return Color.white;
-        }
+        platform.Accept(_platformVisitor);
+    }
+
+    public void SetLaserColor(Color color)
+    {
+        Color setColor = color;
+        _lineRenderer.startColor = setColor;
+        _lineRenderer.endColor = setColor;
     }
 }

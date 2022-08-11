@@ -23,13 +23,14 @@ public class HookType : MonoBehaviour //доработать
 
     [Header("Launching:")]
     [SerializeField] private bool _isLaunchToPoint = true;
-    [SerializeField] private float _launchSpeed = 1;
 
     [Header("No Launch To Point")]
     [SerializeField] private bool _autoConfigureDistance = false;
     [SerializeField] private float _targetDistance = 3;
     [SerializeField] private float _targetFrequncy = 1;
 
+    [SerializeField] protected Launch_Type LaunchType;
+    [SerializeField] protected float _launchSpeed;
 
     protected enum Launch_Type
     {
@@ -37,14 +38,13 @@ public class HookType : MonoBehaviour //доработать
         Physics_Launch
     }
 
-    [SerializeField] protected Launch_Type LaunchType;
 
     private Camera _camera;
 
     private Transform _gunHolder;
     private Transform _gunPivot;
 
-    private SpringJoint2D _springJoint2D;
+    protected SpringJoint2D _springJoint2D;
     private Rigidbody2D _rigidbody;
 
     public Vector2 GrapplePoint { get; private set; }
@@ -53,7 +53,7 @@ public class HookType : MonoBehaviour //доработать
 
     public Transform ShotPoint => _shotPoint;
 
-    private void Start()
+    protected virtual void Start()
     {
         _camera = Camera.main;
 

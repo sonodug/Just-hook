@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class BouncePlatform : Platform
 {
-    public void ShowMessage()
+    [SerializeField] private float _jumpForce;
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log("BouncePlatform");
+        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        {
+            player.ForcePush(_jumpForce);
+        }
+    }
+
+    public override void Accept(IPlatformVisitor visitor)
+    {
+        visitor.Visit(this);
     }
 }

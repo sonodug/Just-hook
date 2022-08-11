@@ -1,35 +1,47 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Hook : MonoBehaviour
 {
+    public enum Hook_Type
+    {
+        AttractingHookType,
+        BounceHookType,
+        PhysicsHookType
+    }
+
+    [Header("Dictionary Alternative | Match according to the order:")]
+    [SerializeField] private List<Hook_Type> _hook_Types;
     [SerializeField] private List<HookType> _hookTypes;
+
     [SerializeField] private FocusingLaser _focusingLaser;
     [SerializeField] private PlatformTracker _platformTracker;
-    [SerializeField] private PlatformMatcher _platformMatcher;
     [SerializeField] private Color _hookColor;
 
+    private Dictionary<Hook_Type, HookType> _hookTypesDic;
+    private readonly PlatformToHookMatcherVisitor _platformVisitor = new PlatformToHookMatcherVisitor();
     private HookType _currentHookType;
-
-    private SpriteRenderer _spriteRenderer;
 
     private void Start()
     {
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _spriteRenderer.color = _hookColor; //Зачем???
+        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+
+        FillDictionary();
 
         foreach (var type in _hookTypes)
         {
             type.gameObject.SetActive(false);
         }
 
+        _platformVisitor.Init(this);
+
         _hookTypes[0].gameObject.SetActive(true);
         _currentHookType = _hookTypes[0];
 
-        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
     }
 
     private void OnDisable()
@@ -37,11 +49,30 @@ public class Hook : MonoBehaviour
         _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
     }
 
+    public void FillDictionary()
+    {
+        _hookTypesDic = new Dictionary<Hook_Type, HookType>();
+
+        for (int i = 0; i < _hookTypes.Count; i++)
+        {
+            _hookTypesDic.Add(_hook_Types[i], _hookTypes[i]);
+        }
+    }
+
     private void OnPlatformFocusChanged(Platform platform)
     {
-        print("jjjj");
         _currentHookType.gameObject.SetActive(false);
-        _currentHookType = _platformMatcher.Match(platform, _hookTypes);
+
+        platform.Accept(_platformVisitor);
+
         _currentHookType.gameObject.SetActive(true);
+    }
+
+    public void SetCurrentHook(Hook_Type hook_Type)
+    {
+        if (_hookTypesDic.TryGetValue(hook_Type, out HookType hookType))
+        {
+            _currentHookType = hookType;
+        }
     }
 }
