@@ -24,11 +24,15 @@ public class GrapplingRope : MonoBehaviour
 
     [Range(1, 50)] [SerializeField] private float _ropeProgressionSpeed = 1;
 
+    [SerializeField] private PlatformTracker _platformTracker;
+
     private float _waveSize = 0;
     private float _moveTime = 0;
     private bool _straightLine = true;
+    private Platform _targetPlatform;
 
     public bool IsGrappling;
+    public bool Affectable = false;
 
     private void Update()
     {
@@ -38,6 +42,8 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnEnable()
     {
+        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+
         _moveTime = 0;
         _lineRenderer.positionCount = _precision;
         _waveSize = _startWaveSize;
@@ -50,6 +56,8 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnDisable()
     {
+        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+
         _lineRenderer.enabled = false;
         IsGrappling = false;
     }
@@ -80,8 +88,10 @@ public class GrapplingRope : MonoBehaviour
         {
             if (!IsGrappling)
             {
+                Debug.Log("why");
                 _grapplingHook.Grapple();
                 IsGrappling = true;
+                _targetPlatform.InitializeRopeConnection(this);
             }
             if (_waveSize > 0)
             {
@@ -116,5 +126,10 @@ public class GrapplingRope : MonoBehaviour
     {
         _lineRenderer.SetPosition(0, _grapplingHook.FirePoint.position);
         _lineRenderer.SetPosition(1, _grapplingHook.GrapplePoint);
+    }
+
+    private void OnPlatformFocusChanged(Platform platform)
+    {
+        _targetPlatform = platform;
     }
 }

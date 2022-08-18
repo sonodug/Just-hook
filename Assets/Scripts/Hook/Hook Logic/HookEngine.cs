@@ -13,6 +13,8 @@ public abstract class HookEngine : MonoBehaviour
 
     [SerializeField] private float _maxDistance = 20;
 
+    private bool _isReadyToMove = false;
+
     private Camera _camera;
 
     private Transform _hookPivot;
@@ -49,9 +51,14 @@ public abstract class HookEngine : MonoBehaviour
         _focusingLaser.DrawStraightTrajectory(transform.position, GrapplingRope);
 
         ListenInput();
+
+        if (_isReadyToMove && GrapplingRope.IsGrappling)
+        {
+            MoveHookHolderAtLaunch();
+        }
     }
 
-    private void SetGrapplePoint()
+    private bool TrySetGrapplePoint()
     {
         Vector2 distanceVector = _camera.ScreenToWorldPoint(Input.mousePosition) - _hookPivot.position;
 
@@ -62,8 +69,11 @@ public abstract class HookEngine : MonoBehaviour
             if (_hitLayer)
             {
                 CalculateGrapplePoint(_hitLayer);
+                return true;
             }
         }
+
+        return false;
     }
 
     private void CalculateGrapplePoint(RaycastHit2D _hit)
@@ -77,29 +87,37 @@ public abstract class HookEngine : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            SetGrapplePoint();
-        }
-        else if (Input.GetMouseButton(0))
-        {
-            if (GrapplingRope.enabled)
+            if (TrySetGrapplePoint())
             {
-                _rotator.RotateGun(GrapplePoint, false);
-            }
-            else
-            {
-                Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                _rotator.RotateGun(mousePos, true);
-            }
+                if (GrapplingRope.enabled)
+                {
+                    _rotator.RotateGun(GrapplePoint, false);
+                }
+                else
+                {
+                    Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
+                    _rotator.RotateGun(mousePos, true);
+                }
 
-            MoveHookHolderAtLaunch();
+                _isReadyToMove = true;
+            }
         }
-        else if (Input.GetMouseButtonUp(0))
+        else if (Input.GetKeyDown(KeyCode.Space)) //добавить параметр affectable
         {
+            _isReadyToMove = false;
             GrapplingRope.enabled = false;
             SpringJoint2D.enabled = false;
             Rigidbody.gravityScale = 1;
 
             MoveHookHolderAfterLaunch();
+        }
+        else if (GrapplingRope.Affectable) //добавить параметр affectable
+        {
+            GrapplingRope.enabled = false;
+            SpringJoint2D.enabled = false;
+
+            MoveHookHolderAfterLaunchWithEffect();
+            GrapplingRope.Affectable = false;
         }
         else
         {
@@ -110,9 +128,10 @@ public abstract class HookEngine : MonoBehaviour
 
     public abstract void Grapple();
 
-    public abstract void MoveHookHolderAtLaunch();
+    protected abstract void MoveHookHolderAtLaunch();
 
-    public abstract void MoveHookHolderAfterLaunch();
+    protected abstract void MoveHookHolderAfterLaunch();
+    protected abstract void MoveHookHolderAfterLaunchWithEffect();
 
     private void OnDrawGizmosSelected()
     {

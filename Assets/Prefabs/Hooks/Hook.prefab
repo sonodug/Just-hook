@@ -356,6 +356,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttractingHookType
       objectReference: {fileID: 0}
+    - target: {fileID: 2182239061293129200, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
     - target: {fileID: 4896968805194754336, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -493,6 +497,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PhysicsHookType
       objectReference: {fileID: 0}
+    - target: {fileID: 7390541608535571984, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
     - target: {fileID: 7686904945688532790, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -583,6 +591,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 5090947632908933764}
     - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _jumpForce
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _shotPoint
       value: 
       objectReference: {fileID: 909893916252431679}
@@ -602,6 +614,10 @@ PrefabInstance:
       propertyPath: _focusingLaser
       value: 
       objectReference: {fileID: 3237625579684905061}
+    - target: {fileID: 4140907138823896347, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
     - target: {fileID: 7037311042582166210, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: m_Name
       value: BounceHookTyoe

@@ -67,8 +67,8 @@ public class FocusingLaser : MonoBehaviour
                 _lineRenderer.SetPosition(1, _hit.point);
             }
             else
-            {
                 _lineRenderer.enabled = false;
+            {
             }
         }
         else

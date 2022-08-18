@@ -33,7 +33,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void ForcePush(float jumpForce)
+    public void ForcePush(float jumpForce, Vector3 direction)
     {
         _rigidbody.velocity = Vector3.zero;
         _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);

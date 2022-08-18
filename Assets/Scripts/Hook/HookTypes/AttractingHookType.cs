@@ -14,19 +14,16 @@ public class AttractingHookType : HookEngine
         Rigidbody.velocity = Vector2.zero;
     }
 
-    public override void MoveHookHolderAtLaunch()
+    protected override void MoveHookHolderAtLaunch()
     {
-        if (GrapplingRope.IsGrappling)
-        {
-            _isReadyToJerk = true;
+        _isReadyToJerk = true;
 
-            Vector2 firePointDistnace = ShotPoint.position - HookHolder.localPosition;
-            Vector2 targetPos = GrapplePoint - firePointDistnace;
-            HookHolder.position = Vector2.MoveTowards(HookHolder.position, targetPos, Time.deltaTime * _launchSpeed);
-        }
+        Vector2 firePointDistnace = ShotPoint.position - HookHolder.localPosition;
+        Vector2 targetPos = GrapplePoint - firePointDistnace;
+        HookHolder.position = Vector2.MoveTowards(HookHolder.position, targetPos, Time.deltaTime * _launchSpeed);
     }
 
-    public override void MoveHookHolderAfterLaunch()
+    protected override void MoveHookHolderAfterLaunch()
     {
         if (_isReadyToJerk)
         {
@@ -34,5 +31,10 @@ public class AttractingHookType : HookEngine
         }
 
         _isReadyToJerk = false;
+    }
+
+    protected override void MoveHookHolderAfterLaunchWithEffect()
+    {
+        
     }
 }

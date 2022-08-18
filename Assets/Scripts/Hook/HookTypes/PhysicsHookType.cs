@@ -19,7 +19,12 @@ public class PhysicsHookType : HookEngine
         SpringJoint2D.enabled = true;
     }
 
-    public override void MoveHookHolderAfterLaunch() {}
+    protected override void MoveHookHolderAfterLaunch() {}
 
-    public override void MoveHookHolderAtLaunch() {}
+    protected override void MoveHookHolderAfterLaunchWithEffect()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    protected override void MoveHookHolderAtLaunch() {}
 }
