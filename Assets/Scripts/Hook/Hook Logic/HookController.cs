@@ -2,35 +2,31 @@ using System;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class HookType : MonoBehaviour //доработать
+public class HookController : MonoBehaviour
 {
+    [SerializeField] protected Launch_Type LaunchType;
+    [SerializeField] protected float _launchSpeed;
+
     [Header("Scripts Reference:")]
-    [SerializeField] private GrapplingRope _grapplingRope; //ok
+    [SerializeField] private GrapplingRope _grapplingRope;
+
+    [SerializeField] private HookRotator _rotator;
 
     [Header("Layers Settings:")]
-    [SerializeField] private bool _grappleToAll = false;
     [SerializeField] private LayerMask _grappableLayer;
 
     [SerializeField] private Transform _shotPoint;
-
-    [Header("Rotation:")]
-    [SerializeField] private bool _isRotateOverTime = true;
-
-    [Range(0, 60)][SerializeField] private float _rotationSpeed = 4;
 
     [SerializeField] private float _maxDistance = 20;
     [SerializeField] private FocusingLaser _focusingLaser;
 
     [Header("Launching:")]
-    [SerializeField] private bool _isLaunchToPoint = true;
+    [SerializeField] private bool _isLaunchToPoint = true; //hardcode
 
     [Header("No Launch To Point")]
     [SerializeField] private bool _autoConfigureDistance = false;
     [SerializeField] private float _targetDistance = 3;
     [SerializeField] private float _targetFrequncy = 1;
-
-    [SerializeField] protected Launch_Type LaunchType;
-    [SerializeField] protected float _launchSpeed;
 
     protected enum Launch_Type
     {
@@ -38,11 +34,12 @@ public class HookType : MonoBehaviour //доработать
         Physics_Launch
     }
 
-
     private Camera _camera;
 
     private Transform _gunHolder;
     private Transform _gunPivot;
+
+    private bool _isReadyToJerk = false;
 
     protected SpringJoint2D _springJoint2D;
     private Rigidbody2D _rigidbody;
@@ -52,6 +49,7 @@ public class HookType : MonoBehaviour //доработать
     public Vector2 GrappleDistanceVector { get; private set; }
 
     public Transform ShotPoint => _shotPoint;
+
 
     protected virtual void Start()
     {
@@ -79,21 +77,24 @@ public class HookType : MonoBehaviour //доработать
         {
             if (_grapplingRope.enabled)
             {
-                RotateGun(GrapplePoint, false);
+                _rotator.RotateGun(GrapplePoint, false);
             }
             else
             {
                 Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-                RotateGun(mousePos, true);
+                _rotator.RotateGun(mousePos, true);
             }
 
+            //related to attracting hook --------------------------------------------------------------!!!!!!!!!!
             if (_isLaunchToPoint && _grapplingRope.IsGrappling)
             {
+                _isReadyToJerk = true;
+
                 if (LaunchType == Launch_Type.Transform_Launch)
                 {
                     Vector2 firePointDistnace = _shotPoint.position - _gunHolder.localPosition;
                     Vector2 targetPos = GrapplePoint - firePointDistnace;
-                    _gunHolder.position = Vector2.Lerp(_gunHolder.position, targetPos, Time.deltaTime * _launchSpeed);
+                    _gunHolder.position = Vector2.MoveTowards(_gunHolder.position, targetPos, Time.deltaTime * _launchSpeed);
                 }
             }
         }
@@ -102,26 +103,23 @@ public class HookType : MonoBehaviour //доработать
             _grapplingRope.enabled = false;
             _springJoint2D.enabled = false;
             _rigidbody.gravityScale = 1;
+
+            if (_isReadyToJerk)
+            {
+                switch (LaunchType)
+                {
+                    case Launch_Type.Transform_Launch:
+                        _rigidbody.velocity = GrappleDistanceVector;
+                        break;
+                }
+            }
+
+            _isReadyToJerk = false;
         }
         else
         {
             Vector2 mousePos = _camera.ScreenToWorldPoint(Input.mousePosition);
-            RotateGun(mousePos, true);
-        }
-    }
-
-    private void RotateGun(Vector3 lookPoint, bool allowRotationOverTime)
-    {
-        Vector3 distanceVector = lookPoint - _gunPivot.position;
-
-        float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
-        if (_isRotateOverTime && allowRotationOverTime)
-        {
-            _gunPivot.rotation = Quaternion.Lerp(_gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * _rotationSpeed);
-        }
-        else
-        {
-            _gunPivot.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+            _rotator.RotateGun(mousePos, true);
         }
     }
 
@@ -131,23 +129,11 @@ public class HookType : MonoBehaviour //доработать
 
         if (Physics2D.Raycast(_shotPoint.position, distanceVector.normalized))
         {
-            if (_grappleToAll)
-            {
-                RaycastHit2D _hitAll = Physics2D.Raycast(_shotPoint.position, distanceVector.normalized, _maxDistance);
+            RaycastHit2D _hitLayer = Physics2D.Raycast(_shotPoint.position, distanceVector.normalized, _maxDistance, _grappableLayer);
 
-                if (_hitAll)
-                {
-                    CalculateGrapplePoint(_hitAll);
-                }
-            }
-            else
+            if (_hitLayer)
             {
-                RaycastHit2D _hitLayer = Physics2D.Raycast(_shotPoint.position, distanceVector.normalized, _maxDistance, _grappableLayer);
-
-                if (_hitLayer)
-                {
-                    CalculateGrapplePoint(_hitLayer);
-                }
+                CalculateGrapplePoint(_hitLayer);
             }
         }
     }
@@ -159,7 +145,7 @@ public class HookType : MonoBehaviour //доработать
         _grapplingRope.enabled = true;
     }
 
-    public void Grapple()
+    public void Grapple() //template method actually
     {
         _springJoint2D.autoConfigureDistance = false;
 
@@ -182,7 +168,7 @@ public class HookType : MonoBehaviour //доработать
         }
         else
         {
-            switch (LaunchType)
+            switch (LaunchType) //override via template method
             {
                 case Launch_Type.Physics_Launch:
                     _springJoint2D.connectedAnchor = GrapplePoint;
@@ -209,5 +195,10 @@ public class HookType : MonoBehaviour //доработать
             Gizmos.color = Color.green;
             Gizmos.DrawWireSphere(_shotPoint.position, _maxDistance);
         }
+    }
+
+    public void BreakConnection()
+    {
+        _isLaunchToPoint = true;
     }
 }

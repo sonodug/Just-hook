@@ -11,20 +11,21 @@ public class Hook : MonoBehaviour
     {
         AttractingHookType,
         BounceHookType,
-        PhysicsHookType
+        PhysicsHookType,
+        TransporterHookType
     }
 
     [Header("Dictionary Alternative | Match according to the order:")]
     [SerializeField] private List<Hook_Type> _hook_Types;
-    [SerializeField] private List<HookType> _hookTypes;
+    [SerializeField] private List<HookController> _hookTypes;
 
     [SerializeField] private FocusingLaser _focusingLaser;
     [SerializeField] private PlatformTracker _platformTracker;
     [SerializeField] private Color _hookColor;
 
-    private Dictionary<Hook_Type, HookType> _hookTypesDic;
+    private Dictionary<Hook_Type, HookController> _hookTypesDic;
     private readonly PlatformToHookMatcherVisitor _platformVisitor = new PlatformToHookMatcherVisitor();
-    private HookType _currentHookType;
+    private HookController _currentHookType;
 
     private void Start()
     {
@@ -51,7 +52,7 @@ public class Hook : MonoBehaviour
 
     public void FillDictionary()
     {
-        _hookTypesDic = new Dictionary<Hook_Type, HookType>();
+        _hookTypesDic = new Dictionary<Hook_Type, HookController>();
 
         for (int i = 0; i < _hookTypes.Count; i++)
         {
@@ -70,7 +71,7 @@ public class Hook : MonoBehaviour
 
     public void SetCurrentHook(Hook_Type hook_Type)
     {
-        if (_hookTypesDic.TryGetValue(hook_Type, out HookType hookType))
+        if (_hookTypesDic.TryGetValue(hook_Type, out HookController hookType))
         {
             _currentHookType = hookType;
         }

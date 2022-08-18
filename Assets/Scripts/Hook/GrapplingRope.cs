@@ -6,7 +6,7 @@ using UnityEngine;
 public class GrapplingRope : MonoBehaviour
 {
     [Header("General References:")]
-    [SerializeField] private HookType _grapplingHook;
+    [SerializeField] private HookController _grapplingHook;
     [SerializeField] private LineRenderer _lineRenderer;
 
     [Header("General Settings:")]

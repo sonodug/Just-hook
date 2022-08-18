@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BounceHookType : HookType
+public class BounceHookType : HookController
 {
     [SerializeField] private float _breakForce;
 
