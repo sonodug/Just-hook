@@ -2,13 +2,28 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BounceHookType : HookController
+public class BounceHookType : HookEngine
 {
-    [SerializeField] private float _breakForce;
+    [SerializeField] private float _launchSpeed;
 
-    private void OnEnabled()
+    public override void Grapple()
     {
-        _springJoint2D = transform.root.gameObject.GetComponent<SpringJoint2D>();
-        _springJoint2D.breakForce = _breakForce;
+        Rigidbody.gravityScale = 0;
+        Rigidbody.velocity = Vector2.zero;
+    }
+
+    public override void MoveHookHolderAfterLaunch()
+    {
+        if (GrapplingRope.IsGrappling)
+        {
+            Vector2 firePointDistnace = ShotPoint.position - HookHolder.localPosition;
+            Vector2 targetPos = GrapplePoint - firePointDistnace;
+            HookHolder.position = Vector2.MoveTowards(HookHolder.position, targetPos, Time.deltaTime * _launchSpeed);
+        }
+    }
+
+    public override void MoveHookHolderAtLaunch()
+    {
+        Rigidbody.velocity = GrappleDistanceVector;
     }
 }

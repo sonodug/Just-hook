@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class EnvironmentTracker : MonoBehaviour
 {
-    public abstract void Track(RaycastHit2D hit);
+    public abstract bool TryTrack(RaycastHit2D hit);
 }

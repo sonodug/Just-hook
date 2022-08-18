@@ -7,11 +7,16 @@ public class PlatformTracker : EnvironmentTracker
 {
     public event UnityAction<Platform> PlatformFocusChanged;
 
-    public override void Track(RaycastHit2D hit)
+    public override bool TryTrack(RaycastHit2D hit)
     {
         if (hit.collider.TryGetComponent<Platform>(out Platform target))
         {
             PlatformFocusChanged?.Invoke(target);
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

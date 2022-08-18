@@ -51,7 +51,12 @@ public class FocusingLaser : MonoBehaviour
 
             if (_hit)
             {
-                _platformTracker.Track(_hit);
+                bool isPlatform = _platformTracker.TryTrack(_hit);
+
+                if (!isPlatform)
+                {
+                    SetLaserColor(Color.white);
+                }
 
                 _lineRenderer.enabled = true;
 

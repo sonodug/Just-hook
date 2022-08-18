@@ -19,6 +19,7 @@ public class HookRotator : MonoBehaviour
         Vector3 distanceVector = lookPoint - _gunPivot.position;
 
         float angle = Mathf.Atan2(distanceVector.y, distanceVector.x) * Mathf.Rad2Deg;
+
         if (_isRotateOverTime && allowRotationOverTime)
         {
             _gunPivot.rotation = Quaternion.Lerp(_gunPivot.rotation, Quaternion.AngleAxis(angle, Vector3.forward), Time.deltaTime * _rotationSpeed);
