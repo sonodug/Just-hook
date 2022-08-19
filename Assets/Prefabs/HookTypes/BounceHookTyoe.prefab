@@ -205,7 +205,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _ropeProgressionSpeed: 4.9
-  _isGrappling: 1
+  _platformTracker: {fileID: 0}
+  IsGrappling: 0
+  Affectable: 0
 --- !u!1 &5048351465637105792
 GameObject:
   m_ObjectHideFlags: 0
@@ -262,7 +264,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7037311042582166210}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -282,21 +284,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af299a38adca2c3418d1505de474bc1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grapplingRope: {fileID: 4140907138823896347}
+  GrapplingRope: {fileID: 4140907138823896347}
+  ShotPoint: {fileID: 4336064790145913509}
   _rotator: {fileID: 6256836667226018098}
+  _focusingLaser: {fileID: 0}
   _grappableLayer:
     serializedVersion: 2
     m_Bits: 256
-  _shotPoint: {fileID: 0}
+  _platformTracker: {fileID: 0}
   _maxDistance: 20
-  _focusingLaser: {fileID: 0}
-  _isLaunchToPoint: 1
-  _autoConfigureDistance: 0
-  _targetDistance: 3
-  _targetFrequncy: 10
-  LaunchType: 0
-  _launchSpeed: 4
-  _breakForce: 0.001
+  _launchSpeed: 20
+  _jumpForce: 2
 --- !u!114 &6256836667226018098
 MonoBehaviour:
   m_ObjectHideFlags: 0

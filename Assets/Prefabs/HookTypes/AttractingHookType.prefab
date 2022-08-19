@@ -45,20 +45,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f5e421a98141b4db0a8e626509b315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grapplingRope: {fileID: 2182239061293129200}
+  GrapplingRope: {fileID: 2182239061293129200}
+  ShotPoint: {fileID: 1540003172109206750}
   _rotator: {fileID: 466784657451933284}
+  _focusingLaser: {fileID: 0}
   _grappableLayer:
     serializedVersion: 2
     m_Bits: 256
-  _shotPoint: {fileID: 1540003172109206750}
+  _platformTracker: {fileID: 0}
   _maxDistance: 20
-  _focusingLaser: {fileID: 0}
-  _isLaunchToPoint: 1
-  _autoConfigureDistance: 0
-  _targetDistance: 3
-  _targetFrequncy: 1
-  LaunchType: 0
-  _launchSpeed: 3
+  _launchSpeed: 10
+  _lerpingTime: 2
 --- !u!114 &466784657451933284
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,7 +284,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   _ropeProgressionSpeed: 4.9
-  _isGrappling: 1
+  _platformTracker: {fileID: 0}
+  IsGrappling: 0
+  Affectable: 0
 --- !u!1 &5887182803234852848
 GameObject:
   m_ObjectHideFlags: 0

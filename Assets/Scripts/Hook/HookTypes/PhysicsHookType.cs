@@ -13,7 +13,7 @@ public class PhysicsHookType : HookEngine
 
         Vector2 distanceVector = ShotPoint.position - HookHolder.position;
 
-        SpringJoint2D.distance = distanceVector.magnitude;
+        //SpringJoint2D.distance = distanceVector.magnitude;
         SpringJoint2D.frequency = _frequency;
         SpringJoint2D.distance = _distance;
         SpringJoint2D.enabled = true;
@@ -23,7 +23,6 @@ public class PhysicsHookType : HookEngine
 
     protected override void MoveHookHolderAfterLaunchWithEffect()
     {
-        throw new System.NotImplementedException();
     }
 
     protected override void MoveHookHolderAtLaunch() {}

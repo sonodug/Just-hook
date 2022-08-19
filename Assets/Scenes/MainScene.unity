@@ -1485,7 +1485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1331845880}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Platforms
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1971,14 +1971,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080762447}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4964814, y: -2.9989681, z: 134.23117}
+  m_LocalRotation: {x: -0, y: -0, z: -0.60876125, w: 0.79335356}
+  m_LocalPosition: {x: 4.4964814, y: -0.71, z: 134.23117}
   m_LocalScale: {x: 4, y: 0.4671936, z: 1}
   m_Children:
   - {fileID: 1082540600}
   m_Father: {fileID: 1331845880}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -75}
 --- !u!1 &2933112015012923806
 GameObject:
   m_ObjectHideFlags: 0

@@ -56,7 +56,7 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnDisable()
     {
-        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+        _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
 
         _lineRenderer.enabled = false;
         IsGrappling = false;
@@ -86,13 +86,11 @@ public class GrapplingRope : MonoBehaviour
         }
         else
         {
-            if (!IsGrappling)
-            {
-                Debug.Log("why");
-                _grapplingHook.Grapple();
-                IsGrappling = true;
-                _targetPlatform.InitializeRopeConnection(this);
-            }
+            _targetPlatform.InitializeRopeConnection(this);
+
+            _grapplingHook.Grapple();
+            IsGrappling = true;
+
             if (_waveSize > 0)
             {
                 _waveSize -= Time.deltaTime * _straightenLineSpeed;

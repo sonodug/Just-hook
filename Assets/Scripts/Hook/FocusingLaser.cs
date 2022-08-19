@@ -34,42 +34,30 @@ public class FocusingLaser : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 
-    public void DrawStraightTrajectory(Vector3 startPosition, GrapplingRope grapplingRope)
+    public void DrawStraightTrajectory(Vector3 startPosition, bool a)
     {
         startPosition.z = 0;
 
         _targetPosition = _camera.ScreenToWorldPoint(Input.mousePosition);
         _targetPosition.z = 0;
 
-        //Условие по рейкасту на платформу + isGrappling
-        if (!grapplingRope.enabled)
+        _hit = Physics2D.Raycast(transform.position, JointVector.normalized);
+
+        if (_hit)
         {
-            _hit = Physics2D.Raycast(transform.position, JointVector.normalized);
+            bool isPlatform = _platformTracker.TryTrack(_hit, a);
 
-            if (_hit)
+            if (!isPlatform)
             {
-                bool isPlatform = _platformTracker.TryTrack(_hit);
-
-                if (!isPlatform)
-                {
-                    SetLaserColor(Color.white);
-                }
-
-                _lineRenderer.enabled = true;
-
-                //Accept
-
-                _lineRenderer.SetPosition(0, startPosition);
-
-                _lineRenderer.SetPosition(1, _hit.point);
+                SetLaserColor(Color.white);
             }
-            else
-                _lineRenderer.enabled = false;
-            {
-            }
+
+            _lineRenderer.enabled = true;
+            _lineRenderer.SetPosition(0, startPosition);
+            _lineRenderer.SetPosition(1, _hit.point);
         }
         else
         {

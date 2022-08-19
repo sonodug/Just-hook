@@ -29,25 +29,29 @@ public class Hook : MonoBehaviour
 
     private void Start()
     {
-        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+        _platformTracker.PlatformFocusChangedWithChangable += OnPlatformFocusChanged;
 
         FillDictionary();
 
-        foreach (var type in _hookTypes)
-        {
-            type.gameObject.SetActive(false);
-        }
-
         _platformVisitor.Init(this);
 
-        _hookTypes[0].gameObject.SetActive(true);
+        foreach (var hookType in _hookTypes)
+        {
+            hookType.gameObject.SetActive(true);
+        }
+
         _currentHookType = _hookTypes[0];
 
     }
 
+    private void Update()
+    {
+        ListenInputs();
+    }
+
     private void OnDisable()
     {
-        _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
+        _platformTracker.PlatformFocusChangedWithChangable -= OnPlatformFocusChanged;
     }
 
     public void FillDictionary()
@@ -62,18 +66,34 @@ public class Hook : MonoBehaviour
 
     private void OnPlatformFocusChanged(Platform platform)
     {
-        _currentHookType.gameObject.SetActive(false);
-
         platform.Accept(_platformVisitor);
-
-        _currentHookType.gameObject.SetActive(true);
     }
 
     public void SetCurrentHook(Hook_Type hook_Type)
     {
+        _currentHookType.Disable();
+
         if (_hookTypesDic.TryGetValue(hook_Type, out HookEngine hookType))
         {
             _currentHookType = hookType;
+        }
+    }
+
+    private void ListenInputs()
+    {
+        if (Input.GetMouseButton(1))
+        {
+            _focusingLaser.DrawStraightTrajectory(transform.position, false);
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                _focusingLaser.DrawStraightTrajectory(transform.position, true);
+                _currentHookType.Enable();
+            }
+        }
+        else if(Input.GetKeyDown(KeyCode.Space))
+        {
+            _currentHookType.Disable();
         }
     }
 }

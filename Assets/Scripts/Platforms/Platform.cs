@@ -10,7 +10,6 @@ public abstract class Platform : MonoBehaviour
 
     public void InitializeRopeConnection(GrapplingRope grapplingRope)
     {
-        print("a");
         _connectedRope = grapplingRope;
     }
 
@@ -20,9 +19,8 @@ public abstract class Platform : MonoBehaviour
         {
             if (_connectedRope.IsGrappling)
             {
-                print("b");
-                _connectedRope.enabled = false;
                 _connectedRope.Affectable = true;
+                _connectedRope.enabled = false;
                 return true;
             }
         }

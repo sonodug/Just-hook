@@ -405,28 +405,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-      propertyPath: ShotPoint
-      value: 
-      objectReference: {fileID: 909893916252431679}
-    - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-      propertyPath: _launchSpeed
-      value: 10
+      propertyPath: _lerpingTime
+      value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-      propertyPath: GrapplingRope
-      value: 
-      objectReference: {fileID: 556047042662857745}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: _focusingLaser
       value: 
       objectReference: {fileID: 3237625579684905061}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-      propertyPath: _isLaunchToPoint
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-      propertyPath: _autoConfigureDistance
-      value: 0
+      propertyPath: _grappableLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
@@ -446,22 +438,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98f5e421a98141b4db0a8e626509b315, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &909893916252431679 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1540003172109206750, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-  m_PrefabInstance: {fileID: 1873399639571997153}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &556047042662857745 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2182239061293129200, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
-  m_PrefabInstance: {fileID: 1873399639571997153}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4bab981b7c5ed4e957a152fc010dbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &7302631890837202503
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -470,28 +446,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 6629346589915381741}
     m_Modifications:
     - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-      propertyPath: ShotPoint
-      value: 
-      objectReference: {fileID: 333872163746952011}
-    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-      propertyPath: _distance
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-      propertyPath: _frequency
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-      propertyPath: GrapplingRope
-      value: 
-      objectReference: {fileID: 272559501453547607}
-    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: _focusingLaser
       value: 
       objectReference: {fileID: 3237625579684905061}
     - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-      propertyPath: _isLaunchToPoint
-      value: 0
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
+    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
+      propertyPath: _grappableLayer.m_Bits
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 2578412935093921716, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: m_Name
@@ -563,22 +527,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93bfa71da658f2446b28b7df36832414, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &333872163746952011 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 7059972912044659980, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-  m_PrefabInstance: {fileID: 7302631890837202503}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &272559501453547607 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7390541608535571984, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
-  m_PrefabInstance: {fileID: 7302631890837202503}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4bab981b7c5ed4e957a152fc010dbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &8829982247682492449
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -587,33 +535,17 @@ PrefabInstance:
     m_TransformParent: {fileID: 6629346589915381741}
     m_Modifications:
     - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: ShotPoint
-      value: 
-      objectReference: {fileID: 5090947632908933764}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: _jumpForce
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: _shotPoint
-      value: 
-      objectReference: {fileID: 909893916252431679}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: _launchSpeed
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: _maxDistance
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-      propertyPath: GrapplingRope
-      value: 
-      objectReference: {fileID: 4899092896330085690}
-    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _focusingLaser
       value: 
       objectReference: {fileID: 3237625579684905061}
+    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _platformTracker
+      value: 
+      objectReference: {fileID: 380095725522656793}
+    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _grappableLayer.m_Bits
+      value: 256
+      objectReference: {fileID: 0}
     - target: {fileID: 4140907138823896347, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _platformTracker
       value: 
@@ -682,21 +614,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af299a38adca2c3418d1505de474bc1f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &5090947632908933764 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4336064790145913509, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-  m_PrefabInstance: {fileID: 8829982247682492449}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4899092896330085690 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4140907138823896347, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
-  m_PrefabInstance: {fileID: 8829982247682492449}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2e4bab981b7c5ed4e957a152fc010dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
