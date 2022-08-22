@@ -31,18 +31,11 @@ public class PlayerMovementController : MonoBehaviour
 		}
 	}
 
-	public void Move(float speed)
+	public void Move(float speed, Vector2 direction)
     {
         if (_isGrounded)
         {
-            if (_rigidBody.velocity.x > 0.0f)
-            {
-				_rigidBody.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * new Vector2(1, 0)));
-			}
-            else
-            {
-				_rigidBody.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * new Vector2(-1, 0)));
-			}
-        }
+			_rigidBody.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * direction));
+		}
     }
 }
