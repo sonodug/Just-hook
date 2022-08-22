@@ -23,7 +23,9 @@ public abstract class HookEngine : MonoBehaviour
     protected SpringJoint2D SpringJoint2D;
     protected Rigidbody2D Rigidbody;
 
-    public Vector2 GrapplePoint { get; private set; }
+    protected Platform TargetPlatform;
+
+    public Vector2 GrapplePoint;
 
     public Vector2 GrappleDistanceVector { get; private set; }
 
@@ -66,6 +68,8 @@ public abstract class HookEngine : MonoBehaviour
         {
             MoveHookHolderAtLaunch();
         }
+
+        TargetPlatform = _platformTracker.LastTarget;
     }
 
     private bool TrySetGrapplePoint()

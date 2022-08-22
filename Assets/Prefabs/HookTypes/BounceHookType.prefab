@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 2164465906167534923}
   - component: {fileID: 6256836667226018098}
   m_Layer: 7
-  m_Name: BounceHookTyoe
+  m_Name: BounceHookType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -287,7 +287,6 @@ MonoBehaviour:
   GrapplingRope: {fileID: 4140907138823896347}
   ShotPoint: {fileID: 4336064790145913509}
   _rotator: {fileID: 6256836667226018098}
-  _focusingLaser: {fileID: 0}
   _grappableLayer:
     serializedVersion: 2
     m_Bits: 256

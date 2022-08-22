@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7686904945688532790}
-  - component: {fileID: 1701626340878660242}
+  - component: {fileID: 6355557647193792942}
   - component: {fileID: 4304182453921712992}
   m_Layer: 7
-  m_Name: PhysicsHookType
+  m_Name: TransporterHookType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,7 +33,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1701626340878660242
+--- !u!114 &6355557647193792942
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2578412935093921716}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93bfa71da658f2446b28b7df36832414, type: 3}
+  m_Script: {fileID: 11500000, guid: 77c2445fdbdec63409f03328aa23a5dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   GrapplingRope: {fileID: 7390541608535571984}
@@ -53,8 +53,9 @@ MonoBehaviour:
     m_Bits: 256
   _platformTracker: {fileID: 0}
   _maxDistance: 20
-  _frequency: 1
-  _distance: 2.5
+  GrapplePoint: {x: 0, y: 0}
+  _launchSpeed: 20
+  _transportSpeed: 2
 --- !u!114 &4304182453921712992
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e4bab981b7c5ed4e957a152fc010dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grapplingHook: {fileID: 1701626340878660242}
+  _grapplingHook: {fileID: 6355557647193792942}
   _lineRenderer: {fileID: 8306946512136294676}
   _precision: 40
   _straightenLineSpeed: 5

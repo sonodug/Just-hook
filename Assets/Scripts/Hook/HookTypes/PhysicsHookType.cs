@@ -21,9 +21,7 @@ public class PhysicsHookType : HookEngine
 
     protected override void MoveHookHolderAfterLaunch() {}
 
-    protected override void MoveHookHolderAfterLaunchWithEffect()
-    {
-    }
+    protected override void MoveHookHolderAfterLaunchWithEffect() {}
 
     protected override void MoveHookHolderAtLaunch() {}
 }

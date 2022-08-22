@@ -47,11 +47,6 @@ public class AttractingHookType : HookEngine
 
         _currentLerpTime = 0f;
         _isLerping = true;
-
-
-        //Vector2 firePointDistnace = ShotPoint.position - HookHolder.localPosition;
-        //Vector2 targetPos = GrapplePoint - firePointDistnace;
-        //HookHolder.position = Vector2.MoveTowards(HookHolder.position, targetPos, Time.deltaTime * _launchSpeed);
     }
 
     protected override void MoveHookHolderAfterLaunch()
@@ -66,13 +61,5 @@ public class AttractingHookType : HookEngine
         _isReadyToJerk = false;
     }
 
-    protected override void MoveHookHolderAfterLaunchWithEffect()
-    {
-        
-    }
-
-    private void Move()
-    {
-
-    }
+    protected override void MoveHookHolderAfterLaunchWithEffect() {}
 }

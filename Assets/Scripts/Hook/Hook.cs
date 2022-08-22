@@ -91,6 +91,10 @@ public class Hook : MonoBehaviour
                 _currentHookType.Enable();
             }
         }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            _focusingLaser.Disable();
+        }
         else if(Input.GetKeyDown(KeyCode.Space))
         {
             _currentHookType.Disable();

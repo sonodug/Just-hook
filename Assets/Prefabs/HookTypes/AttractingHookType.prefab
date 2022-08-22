@@ -48,14 +48,13 @@ MonoBehaviour:
   GrapplingRope: {fileID: 2182239061293129200}
   ShotPoint: {fileID: 1540003172109206750}
   _rotator: {fileID: 466784657451933284}
-  _focusingLaser: {fileID: 0}
   _grappableLayer:
     serializedVersion: 2
     m_Bits: 256
   _platformTracker: {fileID: 0}
   _maxDistance: 20
   _launchSpeed: 10
-  _lerpingTime: 2
+  _lerpingTime: 0.2
 --- !u!114 &466784657451933284
 MonoBehaviour:
   m_ObjectHideFlags: 0

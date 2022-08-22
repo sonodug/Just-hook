@@ -8,7 +8,7 @@ public class PlatformTracker : EnvironmentTracker
     public event UnityAction<Platform> PlatformFocusChanged;
     public event UnityAction<Platform> PlatformFocusChangedWithChangable;
 
-    private Platform _lastTarget;
+    public Platform LastTarget { get; private set; }
 
     public override bool TryTrack(RaycastHit2D hit, bool isChangeable)
     {
@@ -16,10 +16,10 @@ public class PlatformTracker : EnvironmentTracker
         {
             if (isChangeable)
             {
-                PlatformFocusChangedWithChangable?.Invoke(_lastTarget);
+                PlatformFocusChangedWithChangable?.Invoke(LastTarget);
             }
 
-            _lastTarget = target;
+            LastTarget = target;
             PlatformFocusChanged?.Invoke(target);
 
             return true;

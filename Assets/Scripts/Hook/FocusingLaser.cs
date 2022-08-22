@@ -37,7 +37,7 @@ public class FocusingLaser : MonoBehaviour
 
     }
 
-    public void DrawStraightTrajectory(Vector3 startPosition, bool a)
+    public void DrawStraightTrajectory(Vector3 startPosition, bool changeable)
     {
         startPosition.z = 0;
 
@@ -48,7 +48,7 @@ public class FocusingLaser : MonoBehaviour
 
         if (_hit)
         {
-            bool isPlatform = _platformTracker.TryTrack(_hit, a);
+            bool isPlatform = _platformTracker.TryTrack(_hit, changeable);
 
             if (!isPlatform)
             {
@@ -58,6 +58,11 @@ public class FocusingLaser : MonoBehaviour
             _lineRenderer.enabled = true;
             _lineRenderer.SetPosition(0, startPosition);
             _lineRenderer.SetPosition(1, _hit.point);
+
+            if (changeable)
+            {
+                _lineRenderer.enabled = false;
+            }
         }
         else
         {
@@ -114,6 +119,11 @@ public class FocusingLaser : MonoBehaviour
     private void OnPlatformFocusChanged(Platform platform)
     {
         platform.Accept(_platformVisitor);
+    }
+
+    public void Disable()
+    {
+        _lineRenderer.enabled = false;
     }
 
     public void SetLaserColor(Color color)

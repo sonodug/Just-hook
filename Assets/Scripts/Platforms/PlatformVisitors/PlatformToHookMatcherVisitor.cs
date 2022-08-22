@@ -23,7 +23,7 @@ public class PlatformToHookMatcherVisitor : IPlatformVisitor
 
     public void Visit(TransporterPlatform transporterPlatform)
     {
-
+        _hook.SetCurrentHook(Hook.Hook_Type.TransporterHookType);
     }
 
     public void Init(Hook hook)

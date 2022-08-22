@@ -13,7 +13,7 @@ public abstract class Platform : MonoBehaviour
         _connectedRope = grapplingRope;
     }
 
-    protected bool TryBreakConnection()
+    public bool TryBreakConnection()
     {
         if (_connectedRope)
         {

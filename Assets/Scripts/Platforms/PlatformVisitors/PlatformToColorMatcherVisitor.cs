@@ -23,7 +23,7 @@ public class PlatformToColorMatcherVisitor : IPlatformVisitor
 
     public void Visit(TransporterPlatform transporterPlatform)
     {
-        throw new System.NotImplementedException();
+        _laser.SetLaserColor(Color.green);
     }
 
     public void Init(FocusingLaser laser)
