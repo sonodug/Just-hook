@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Player : MonoBehaviour
@@ -9,14 +10,19 @@ public class Player : MonoBehaviour
     [SerializeField] private Transform _hookPivot;
     [SerializeField] private float _health;
     [SerializeField] private float _hookDamage;
-    [SerializeField] private int _priceLevelCount;
 
     private Rigidbody2D _rigidbody;
+    private int _overallScoreAmount;
+    private int _currentGemsCollected;
+    private int _gemsCollectToFinish; //GameManager should initialize this and others values
+
+    public event UnityAction LevelScoreChanged;
 
     private void Awake()
     {
         Instantiate(_hook, _hookPivot);
         _rigidbody = GetComponent<Rigidbody2D>();
+        _currentGemsCollected = 0;
     }
 
     private void Update()
@@ -31,11 +37,11 @@ public class Player : MonoBehaviour
             Destroy(gameObject);
         }
 
-    }
-
-    public void ForcePush(float jumpForce, Vector3 direction)
-    {
-        _rigidbody.velocity = Vector3.zero;
-        _rigidbody.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
+        if (collision.gameObject.TryGetComponent<Gem>(out Gem gem))
+        {
+            _currentGemsCollected++;
+            LevelScoreChanged?.Invoke();
+            gem.gameObject.SetActive(false);
+        }
     }
 }

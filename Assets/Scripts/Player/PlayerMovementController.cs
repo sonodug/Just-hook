@@ -13,7 +13,7 @@ public class PlayerMovementController : MonoBehaviour
 
 	private void Awake()
 	{
-		_rigidBody = GetComponent<Rigidbody2D>();
+		_rigidBody = GetComponentInParent<Rigidbody2D>();
 	}
 
 	private void FixedUpdate()

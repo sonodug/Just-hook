@@ -65,7 +65,8 @@ public class TransporterHookType : HookEngine
 
         Debug.Log($"{HookHolder.position}, {_targetPosition}");
 
-        if (new Vector2(Convert.ToInt32(HookHolder.position.x), Convert.ToInt32(HookHolder.position.y)) == new Vector2(Convert.ToInt32(_targetPosition.x), Convert.ToInt32(_targetPosition.y))) //candidate to fix
+        //candidate to fix
+        if (new Vector2(Convert.ToInt32(HookHolder.position.x), Convert.ToInt32(HookHolder.position.y)) == new Vector2(Convert.ToInt32(_targetPosition.x), Convert.ToInt32(_targetPosition.y)))
         {
             _isReadyToTransport = true;
             Rigidbody.gravityScale = 0;
