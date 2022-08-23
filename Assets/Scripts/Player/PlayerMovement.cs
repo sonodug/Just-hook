@@ -15,11 +15,11 @@ public class PlayerMovement : MonoBehaviour
             float directionX = Input.GetAxisRaw("Horizontal");
             float directionY = Input.GetAxisRaw("Vertical");
 
-            return new Vector3(directionX, directionY, 0.0f);
+            return new Vector3(directionX, 0.0f, 0.0f);
         }
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         _controller.Move(_runSpeed, (Vector2)_movementVector);
     }

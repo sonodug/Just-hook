@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class NextLevelZone : MonoBehaviour
 {
@@ -9,6 +10,8 @@ public class NextLevelZone : MonoBehaviour
 
     private bool _isExitUnlock;
     private BoxCollider2D _colider;
+
+    public event UnityAction ExitUnlocked;
 
     private void Start()
     {
@@ -31,6 +34,7 @@ public class NextLevelZone : MonoBehaviour
     {
         _colider.isTrigger = true;
         _isExitUnlock = true;
+        ExitUnlocked?.Invoke();
         _spriteRenderer.color = Color.green;
     }
 }

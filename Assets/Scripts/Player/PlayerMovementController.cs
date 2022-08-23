@@ -35,7 +35,8 @@ public class PlayerMovementController : MonoBehaviour
     {
         if (_isGrounded)
         {
-			_rigidBody.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * direction));
+			//_rigidBody.MovePosition((Vector2)transform.position + (speed * Time.deltaTime * direction));
+			transform.parent.Translate(speed * Time.fixedDeltaTime * direction);
 		}
     }
 }

@@ -25,17 +25,14 @@ public class Player : MonoBehaviour
         _currentGemsCollected = 0;
     }
 
+    private void Start()
+    {
+        //DontDestroyOnLoad(gameObject);
+    }
+
     private void Update()
     {
         
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Obstacle>(out Obstacle obstacle))
-        {
-            Destroy(gameObject);
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,8 +40,12 @@ public class Player : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Gem>(out Gem gem))
         {
             _currentGemsCollected++;
-            LevelScoreChanged?.Invoke();
+
+            if (gem.enabled == true)
+                LevelScoreChanged?.Invoke();
+            
             gem.gameObject.SetActive(false);
+            gem.enabled = false;
         }
     }
 }

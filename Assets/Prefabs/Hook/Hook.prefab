@@ -411,6 +411,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
+      propertyPath: _maxDistance
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: _platformTracker
       value: 
       objectReference: {fileID: 380095725522656793}
@@ -446,6 +450,10 @@ PrefabInstance:
     - target: {fileID: 6355557647193792942, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _lerpingTime
       value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6355557647193792942, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
+      propertyPath: _maxDistance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6355557647193792942, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _transportSpeed
@@ -528,6 +536,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6629346589915381741}
     m_Modifications:
+    - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
+      propertyPath: _maxDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: _platformTracker
       value: 
@@ -613,6 +625,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6629346589915381741}
     m_Modifications:
+    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _maxDistance
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _platformTracker
       value: 

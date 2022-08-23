@@ -90,7 +90,7 @@ public class TransporterHookType : HookEngine
     {
         if (_isReadyToJerk)
         {
-            Rigidbody.velocity = -GrappleDistanceVector;
+            Rigidbody.velocity = new Vector2(0, -5);
         }
 
         Rigidbody.gravityScale = 1;

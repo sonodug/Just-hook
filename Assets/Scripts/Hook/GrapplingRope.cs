@@ -86,7 +86,10 @@ public class GrapplingRope : MonoBehaviour
         }
         else
         {
-            _targetPlatform.InitializeRopeConnection(this);
+            if (_targetPlatform != null)
+            {
+                _targetPlatform.InitializeRopeConnection(this);
+            }
 
             _grapplingHook.Grapple();
             IsGrappling = true;

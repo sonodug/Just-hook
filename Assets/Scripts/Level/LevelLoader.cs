@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using IJunior.TypedScenes;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -35,6 +36,13 @@ public class LevelLoader : MonoBehaviour
     public void LoadNextLevel()
     {
         //GameManager => get next level, => load
-        Test_Level2.Load(_levelConfig);
+        //Test_Level2.Load(_levelConfig);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void ReloadLevel()
+    {
+        //Test_Level1.Load();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
