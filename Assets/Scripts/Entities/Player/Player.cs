@@ -9,7 +9,6 @@ public class Player : MonoBehaviour
     [SerializeField] private Hook _hook;
     [SerializeField] private Transform _hookPivot;
     [SerializeField] private float _health;
-    [SerializeField] private float _hookDamage;
 
     private Rigidbody2D _rigidbody;
     private int _overallScoreAmount;

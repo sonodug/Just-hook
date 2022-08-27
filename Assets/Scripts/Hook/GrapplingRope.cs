@@ -42,7 +42,7 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnEnable()
     {
-        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChanged += OnPlatformFocusChanged;
 
         _moveTime = 0;
         _lineRenderer.positionCount = _precision;
@@ -56,7 +56,7 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnDisable()
     {
-        _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChanged -= OnPlatformFocusChanged;
 
         _lineRenderer.enabled = false;
         IsGrappling = false;
@@ -129,8 +129,8 @@ public class GrapplingRope : MonoBehaviour
         _lineRenderer.SetPosition(1, _grapplingHook.GrapplePoint);
     }
 
-    private void OnPlatformFocusChanged(Platform platform)
+    private void OnPlatformFocusChanged(Environment environment)
     {
-        _targetPlatform = platform;
+        _targetPlatform = (Platform)environment;
     }
 }

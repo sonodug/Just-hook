@@ -1252,6 +1252,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6471517515585810295, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 10.707606
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471517515585810295, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 5.771
+      objectReference: {fileID: 0}
     - target: {fileID: 6471517515975972462, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -1299,6 +1307,10 @@ PrefabInstance:
     - target: {fileID: 6471517515975972463, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}
       propertyPath: m_Name
       value: TransporterPlatform
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471517516130667275, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 11.48
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 83f8dbdfb78531c458e485a34c4d83c1, type: 3}

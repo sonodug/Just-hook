@@ -11,7 +11,7 @@ public class FocusingLaser : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private int _accuracy = 100;
 
-    private readonly PlatformToColorMatcherVisitor _platformVisitor = new PlatformToColorMatcherVisitor();
+    private readonly EnvironmentToColorMatcherVisitor _platformVisitor = new EnvironmentToColorMatcherVisitor();
 
     private Camera _camera;
 
@@ -28,7 +28,7 @@ public class FocusingLaser : MonoBehaviour
         _camera = Camera.main;
         _lineRenderer.enabled = false;
 
-        _platformTracker.PlatformFocusChanged += OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChanged += OnPlatformFocusChanged;
         //SetSegments();
     }
 
@@ -107,7 +107,7 @@ public class FocusingLaser : MonoBehaviour
 
     private void OnDisable()
     {
-        _platformTracker.PlatformFocusChanged -= OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChanged -= OnPlatformFocusChanged;
     }
 
     private void SetSegments()
@@ -116,9 +116,9 @@ public class FocusingLaser : MonoBehaviour
         _lineRenderer.positionCount = _points.Length;
     }
 
-    private void OnPlatformFocusChanged(Platform platform)
+    private void OnPlatformFocusChanged(Environment environment)
     {
-        platform.Accept(_platformVisitor);
+        environment.Accept(_platformVisitor);
     }
 
     public void Disable()

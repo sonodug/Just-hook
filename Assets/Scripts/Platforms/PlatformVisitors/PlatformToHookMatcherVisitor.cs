@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformToHookMatcherVisitor : IPlatformVisitor
+public class EnvironmentToHookMatcherVisitor : IEnvironmentVisitor
 {
     private Hook _hook;
 
@@ -26,8 +26,14 @@ public class PlatformToHookMatcherVisitor : IPlatformVisitor
         _hook.SetCurrentHook(Hook.Hook_Type.TransporterHookType);
     }
 
+    public void Visit(Enemy enemy)
+    {
+        _hook.SetCurrentHook(Hook.Hook_Type.DamageDealingHookType);
+    }
+
     public void Init(Hook hook)
     {
         _hook = hook;
     }
+
 }

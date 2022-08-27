@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatformToColorMatcherVisitor : IPlatformVisitor
+public class EnvironmentToColorMatcherVisitor : IEnvironmentVisitor
 {
     private FocusingLaser _laser;
 
@@ -13,7 +13,7 @@ public class PlatformToColorMatcherVisitor : IPlatformVisitor
 
     public void Visit(PhysicsPlatform physicsPlatform)
     {
-        _laser.SetLaserColor(Color.red);
+        _laser.SetLaserColor(Color.black);
     }
 
     public void Visit(BouncePlatform bouncePlatform)
@@ -26,8 +26,14 @@ public class PlatformToColorMatcherVisitor : IPlatformVisitor
         _laser.SetLaserColor(Color.green);
     }
 
+    public void Visit(Enemy enemy)
+    {
+        _laser.SetLaserColor(Color.red);
+    }
+
     public void Init(FocusingLaser laser)
     {
         _laser = laser;
     }
+
 }

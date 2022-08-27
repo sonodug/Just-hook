@@ -9,7 +9,7 @@ public abstract class HookEngine : MonoBehaviour
 
     [SerializeField] private HookRotator _rotator;
     [SerializeField] private LayerMask _grappableLayer;
-    [SerializeField] private PlatformTracker _platformTracker;
+    [SerializeField] private EnvironmentTracker _environmentTracker;
 
     [SerializeField] private float _maxDistance = 20;
 
@@ -23,7 +23,7 @@ public abstract class HookEngine : MonoBehaviour
     protected SpringJoint2D SpringJoint2D;
     protected Rigidbody2D Rigidbody;
 
-    protected Platform TargetPlatform;
+    protected Environment TargetEnvironment;
 
     public Vector2 GrapplePoint;
 
@@ -69,7 +69,7 @@ public abstract class HookEngine : MonoBehaviour
             MoveHookHolderAtLaunch();
         }
 
-        TargetPlatform = _platformTracker.LastTarget;
+        TargetEnvironment = _environmentTracker.LastTarget;
     }
 
     private bool TrySetGrapplePoint()

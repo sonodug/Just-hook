@@ -5,10 +5,8 @@ using UnityEngine.Events;
 
 public class PlatformTracker : EnvironmentTracker
 {
-    public event UnityAction<Platform> PlatformFocusChanged;
-    public event UnityAction<Platform> PlatformFocusChangedWithChangable;
-
-    public Platform LastTarget { get; private set; }
+    public event UnityAction<Environment> EnvironmentFocusChanged;
+    public event UnityAction<Environment> EnvironmentFocusChangedWithChangable;
 
     public override bool TryTrack(RaycastHit2D hit, bool isChangeable)
     {
@@ -16,17 +14,15 @@ public class PlatformTracker : EnvironmentTracker
         {
             if (isChangeable)
             {
-                PlatformFocusChangedWithChangable?.Invoke(LastTarget);
+                EnvironmentFocusChangedWithChangable?.Invoke(LastTarget);
             }
 
             LastTarget = target;
-            PlatformFocusChanged?.Invoke(target);
+            EnvironmentFocusChanged?.Invoke(target);
 
             return true;
         }
         else
-        {
             return false;
-        }
     }
 }

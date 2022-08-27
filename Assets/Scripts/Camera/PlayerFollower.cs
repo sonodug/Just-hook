@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTracker : MonoBehaviour
+public class PlayerFollower : MonoBehaviour
 {
     [SerializeField] private Player _target;
     [SerializeField] private float _smoothTime = 0.3f;

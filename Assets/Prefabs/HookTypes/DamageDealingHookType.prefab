@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &2578412935093921716
+--- !u!1 &3805623810609536167
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,63 +8,60 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7686904945688532790}
-  - component: {fileID: 4762849788626430048}
-  - component: {fileID: 4304182453921712992}
+  - component: {fileID: 9058226507747994661}
+  - component: {fileID: 3793744617216543960}
+  - component: {fileID: 3216574491556900979}
   m_Layer: 7
-  m_Name: TransporterHookType
+  m_Name: DamageDealingHookType
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7686904945688532790
+--- !u!4 &9058226507747994661
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2578412935093921716}
+  m_GameObject: {fileID: 3805623810609536167}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.999988, y: 1, z: 1}
   m_Children:
-  - {fileID: 7059972912044659980}
+  - {fileID: 8566437630540033567}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &4762849788626430048
+--- !u!114 &3793744617216543960
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2578412935093921716}
+  m_GameObject: {fileID: 3805623810609536167}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c2445fdbdec63409f03328aa23a5dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 2d3b031733729d1459b4874ec8ff6196, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GrapplingRope: {fileID: 7390541608535571984}
-  ShotPoint: {fileID: 7059972912044659980}
-  _rotator: {fileID: 4304182453921712992}
+  GrapplingRope: {fileID: 8180907718243796227}
+  ShotPoint: {fileID: 8566437630540033567}
+  _rotator: {fileID: 3216574491556900979}
   _grappableLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 512
   _environmentTracker: {fileID: 0}
   _maxDistance: 15
   GrapplePoint: {x: 0, y: 0}
-  _grappleRadius: 0.5
-  _launchSpeed: 20
-  _lerpingTime: 0.2
-  _transportSpeed: 2
---- !u!114 &4304182453921712992
+  _damage: 5
+--- !u!114 &3216574491556900979
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2578412935093921716}
+  m_GameObject: {fileID: 3805623810609536167}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10caf242fdf59f44da3b197fcc71bfb4, type: 3}
@@ -72,7 +69,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _isRotateOverTime: 1
   _rotationSpeed: 60
---- !u!1 &6402730574612871894
+--- !u!1 &5747446202890764741
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,9 +77,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2758309778772544806}
-  - component: {fileID: 8306946512136294676}
-  - component: {fileID: 7390541608535571984}
+  - component: {fileID: 3557679290727577141}
+  - component: {fileID: 7228318638525131271}
+  - component: {fileID: 8180907718243796227}
   m_Layer: 7
   m_Name: Rope
   m_TagString: Untagged
@@ -90,27 +87,27 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2758309778772544806
+--- !u!4 &3557679290727577141
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402730574612871894}
+  m_GameObject: {fileID: 5747446202890764741}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 7059972912044659980}
+  m_Father: {fileID: 8566437630540033567}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!120 &8306946512136294676
+--- !u!120 &7228318638525131271
 LineRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402730574612871894}
+  m_GameObject: {fileID: 5747446202890764741}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -202,20 +199,20 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &7390541608535571984
+--- !u!114 &8180907718243796227
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6402730574612871894}
+  m_GameObject: {fileID: 5747446202890764741}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2e4bab981b7c5ed4e957a152fc010dbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _grapplingHook: {fileID: 4762849788626430048}
-  _lineRenderer: {fileID: 8306946512136294676}
+  _grapplingHook: {fileID: 3793744617216543960}
+  _lineRenderer: {fileID: 7228318638525131271}
   _precision: 40
   _straightenLineSpeed: 5
   _ropeAnimationCurve:
@@ -280,7 +277,7 @@ MonoBehaviour:
   _platformTracker: {fileID: 0}
   IsGrappling: 0
   Affectable: 0
---- !u!1 &8643765241921704553
+--- !u!1 &6984173617524337018
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -288,7 +285,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7059972912044659980}
+  - component: {fileID: 8566437630540033567}
   m_Layer: 7
   m_Name: ShotPoint
   m_TagString: Untagged
@@ -296,18 +293,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7059972912044659980
+--- !u!4 &8566437630540033567
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8643765241921704553}
+  m_GameObject: {fileID: 6984173617524337018}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.67, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2758309778772544806}
-  m_Father: {fileID: 7686904945688532790}
+  - {fileID: 3557679290727577141}
+  m_Father: {fileID: 9058226507747994661}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

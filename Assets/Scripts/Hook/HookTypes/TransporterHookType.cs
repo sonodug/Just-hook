@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class TransporterHookType : HookEngine
 {
+    [SerializeField] private float _grappleRadius;
     [SerializeField] private float _launchSpeed;
     [SerializeField] private float _lerpingTime;
     [SerializeField] private float _transportSpeed;
@@ -23,7 +24,7 @@ public class TransporterHookType : HookEngine
 
     public override void Grapple()
     {
-        if (TargetPlatform.TryGetComponent<TransporterPlatform>(out TransporterPlatform platform))
+        if (TargetEnvironment.TryGetComponent<TransporterPlatform>(out TransporterPlatform platform))
         {
             _transporterPlatform = platform;
         }
@@ -63,15 +64,26 @@ public class TransporterHookType : HookEngine
         _currentLerpTime = 0f;
         _isLerping = true;
 
-        Debug.Log($"{HookHolder.position}, {_targetPosition}");
 
-        //candidate to fix
-        if (new Vector2(Convert.ToInt32(HookHolder.position.x), Convert.ToInt32(HookHolder.position.y)) == new Vector2(Convert.ToInt32(_targetPosition.x), Convert.ToInt32(_targetPosition.y)))
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(_targetPosition, 0.5f);
+
+        foreach (var collider in colliders)
         {
-            _isReadyToTransport = true;
-            Rigidbody.gravityScale = 0;
-            _targetPoint = _transporterPlatform.TargetPoint;
+            if (collider.gameObject.TryGetComponent<Player>(out Player player))
+            {
+                _isReadyToTransport = true;
+                Rigidbody.gravityScale = 0;
+                _targetPoint = _transporterPlatform.TargetPoint;
+            } 
         }
+
+        //candidate to fix ahahahaha
+        //if (new Vector2(Convert.ToInt32(HookHolder.position.x), Convert.ToInt32(HookHolder.position.y)) == new Vector2(Convert.ToInt32(_targetPosition.x), Convert.ToInt32(_targetPosition.y)))
+        //{
+        //    _isReadyToTransport = true;
+        //    Rigidbody.gravityScale = 0;
+        //    _targetPoint = _transporterPlatform.TargetPoint;
+        //}
 
         if (_isReadyToTransport)
         {

@@ -12,7 +12,8 @@ public class Hook : MonoBehaviour
         AttractingHookType,
         BounceHookType,
         PhysicsHookType,
-        TransporterHookType
+        TransporterHookType,
+        DamageDealingHookType
     }
 
     [Header("Dictionary Alternative | Match according to the order:")]
@@ -24,12 +25,12 @@ public class Hook : MonoBehaviour
     [SerializeField] private Color _hookColor;
 
     private Dictionary<Hook_Type, HookEngine> _hookTypesDic;
-    private readonly PlatformToHookMatcherVisitor _platformVisitor = new PlatformToHookMatcherVisitor();
+    private readonly EnvironmentToHookMatcherVisitor _platformVisitor = new EnvironmentToHookMatcherVisitor();
     private HookEngine _currentHookType;
 
     private void Start()
     {
-        _platformTracker.PlatformFocusChangedWithChangable += OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChangedWithChangable += OnPlatformFocusChanged;
 
         FillDictionary();
 
@@ -51,7 +52,7 @@ public class Hook : MonoBehaviour
 
     private void OnDisable()
     {
-        _platformTracker.PlatformFocusChangedWithChangable -= OnPlatformFocusChanged;
+        _platformTracker.EnvironmentFocusChangedWithChangable -= OnPlatformFocusChanged;
     }
 
     public void FillDictionary()
@@ -64,9 +65,9 @@ public class Hook : MonoBehaviour
         }
     }
 
-    private void OnPlatformFocusChanged(Platform platform)
+    private void OnPlatformFocusChanged(Environment environment)
     {
-        platform.Accept(_platformVisitor);
+        environment.Accept(_platformVisitor);
     }
 
     public void SetCurrentHook(Hook_Type hook_Type)

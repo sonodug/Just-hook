@@ -13,7 +13,7 @@ public class BouncePlatform : Platform
         }
     }
 
-    public override void Accept(IPlatformVisitor visitor)
+    public override void Accept(IEnvironmentVisitor visitor)
     {
         visitor.Visit(this);
     }
