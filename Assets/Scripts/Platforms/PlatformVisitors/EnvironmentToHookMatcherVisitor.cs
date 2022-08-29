@@ -26,7 +26,7 @@ public class EnvironmentToHookMatcherVisitor : IEnvironmentVisitor
         _hook.SetCurrentHook(Hook.Hook_Type.TransporterHookType);
     }
 
-    public void Visit(Enemy enemy)
+    public void Visit(EnemyEnvironment enemy)
     {
         _hook.SetCurrentHook(Hook.Hook_Type.DamageDealingHookType);
     }

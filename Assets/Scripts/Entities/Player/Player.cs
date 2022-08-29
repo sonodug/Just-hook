@@ -9,13 +9,17 @@ public class Player : MonoBehaviour
     [SerializeField] private Hook _hook;
     [SerializeField] private Transform _hookPivot;
     [SerializeField] private float _health;
+    [SerializeField] private float _damage;
 
     private Rigidbody2D _rigidbody;
     private int _overallScoreAmount;
     private int _currentGemsCollected;
     private int _gemsCollectToFinish; //GameManager should initialize this and others values
 
+    public float Damage => _damage;
+
     public event UnityAction LevelScoreChanged;
+    public event UnityAction Died;
 
     private void Awake()
     {
@@ -27,11 +31,6 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //DontDestroyOnLoad(gameObject);
-    }
-
-    private void Update()
-    {
-        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -46,5 +45,21 @@ public class Player : MonoBehaviour
             gem.gameObject.SetActive(false);
             gem.enabled = false;
         }
+    }
+
+    public void ApplyDamage(float damage)
+    {
+        _health -= damage;
+        _rigidbody.AddForce(Vector2.up * 400);
+
+        if (_health <= 0)
+        {
+            Died?.Invoke();
+            Debug.Log("Player Died");
+            gameObject.SetActive(false);
+        }
+
+
+        Debug.Log("Player get damage");
     }
 }

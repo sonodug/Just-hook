@@ -8,5 +8,5 @@ public interface IEnvironmentVisitor
     void Visit(PhysicsPlatform physicsPlatform);
     void Visit(BouncePlatform bouncePlatform);
     void Visit(TransporterPlatform transporterPlatform);
-    void Visit(Enemy enemy);
+    void Visit(EnemyEnvironment enemy);
 }

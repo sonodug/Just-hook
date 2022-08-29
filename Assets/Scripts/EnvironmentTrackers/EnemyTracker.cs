@@ -6,7 +6,7 @@ public class EnemyTracker : EnvironmentTracker
 {
     public override bool TryTrack(RaycastHit2D hit, bool isChangeable)
     {
-        if (hit.collider.TryGetComponent<Enemy>(out Enemy target))
+        if (hit.collider.TryGetComponent<EnemyEnvironment>(out EnemyEnvironment target))
         {
 
 

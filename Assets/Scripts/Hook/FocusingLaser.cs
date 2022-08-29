@@ -48,9 +48,9 @@ public class FocusingLaser : MonoBehaviour
 
         if (_hit)
         {
-            bool isPlatform = _platformTracker.TryTrack(_hit, changeable);
+            bool isGrappleEnvironment = _platformTracker.TryTrack(_hit, changeable);
 
-            if (!isPlatform)
+            if (!isGrappleEnvironment)
             {
                 SetLaserColor(Color.white);
             }

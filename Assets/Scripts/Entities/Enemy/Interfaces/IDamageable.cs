@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemyVisitor
+public interface IDamageable
 {
-    void Visit(EnemyEnvironment enemy);
+    public void ApplyDamage(float damage);
 }

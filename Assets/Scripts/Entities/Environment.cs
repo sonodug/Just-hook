@@ -6,6 +6,8 @@ public abstract class Environment : MonoBehaviour
 {
     public abstract void InitializeRopeConnection(GrapplingRope grapplingRope);
 
+    public abstract void DropRopeConnection();
+
     public abstract bool TryBreakConnection();
 
     public abstract void Accept(IEnvironmentVisitor visitor);

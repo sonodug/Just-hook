@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class BouncePlatform : Platform
+public class BouncePlatform : PlatformEnvironment
 {
     private void OnCollisionEnter2D(Collision2D collision)
     {

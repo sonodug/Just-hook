@@ -58,6 +58,12 @@ public class GrapplingRope : MonoBehaviour
     {
         _platformTracker.EnvironmentFocusChanged -= OnPlatformFocusChanged;
 
+        if (_target != null)
+        {
+            _target.DropRopeConnection();
+            _target = null;
+        }
+
         _lineRenderer.enabled = false;
         IsGrappling = false;
     }
@@ -129,6 +135,7 @@ public class GrapplingRope : MonoBehaviour
 
     private void OnPlatformFocusChanged(Environment environment)
     {
-        _target = environment;
+        if (_target == null)
+            _target = environment;
     }
 }

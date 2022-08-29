@@ -26,7 +26,7 @@ public class EnvironmentToColorMatcherVisitor : IEnvironmentVisitor
         _laser.SetLaserColor(Color.green);
     }
 
-    public void Visit(Enemy enemy)
+    public void Visit(EnemyEnvironment enemy)
     {
         _laser.SetLaserColor(Color.red);
     }
