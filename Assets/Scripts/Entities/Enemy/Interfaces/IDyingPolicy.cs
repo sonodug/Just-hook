@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnemyVisitor
+public interface IDyingPolicy
 {
-    void Visit(EnemyEnvironment enemy);
+    public bool Died(float health);
 }

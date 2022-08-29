@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class DamageDealingHookType : HookEngine
 {
-    [SerializeField] private float _damage;
-
     public override void Grapple() {}
 
     protected override void MoveHookHolderAfterLaunch() {}

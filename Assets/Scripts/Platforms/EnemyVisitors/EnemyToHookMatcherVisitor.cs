@@ -11,7 +11,7 @@ public class EnemyToHookMatcherVisitor : IEnemyVisitor
         _hook = hook;
     }
 
-    public void Visit(Enemy enemy)
+    public void Visit(EnemyEnvironment enemy)
     {
         throw new System.NotImplementedException();
     }

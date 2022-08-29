@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttractingPlatform : Platform
+public class AttractingPlatform : PlatformEnvironment
 {
     public override void Accept(IEnvironmentVisitor visitor)
     {

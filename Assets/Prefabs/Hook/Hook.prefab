@@ -393,7 +393,7 @@ MonoBehaviour:
   _focusingLaser: {fileID: 3237625579684905061}
   _platformTracker: {fileID: 380095725522656793}
   _hookColor: {r: 0, g: 0, b: 0, a: 1}
-  _grapDelay: 0.2
+  _grapDelay: 0.5
 --- !u!1001 &1873399639571997153
 PrefabInstance:
   m_ObjectHideFlags: 0
