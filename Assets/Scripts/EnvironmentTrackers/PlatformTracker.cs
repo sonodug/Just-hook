@@ -10,15 +10,15 @@ public class PlatformTracker : EnvironmentTracker
 
     public override bool TryTrack(RaycastHit2D hit, bool isChangeable)
     {
-        if (hit.collider.TryGetComponent<Platform>(out Platform target))
+        if (hit.collider.TryGetComponent<Environment>(out Environment environment))
         {
             if (isChangeable)
             {
                 EnvironmentFocusChangedWithChangable?.Invoke(LastTarget);
             }
 
-            LastTarget = target;
-            EnvironmentFocusChanged?.Invoke(target);
+            LastTarget = environment;
+            EnvironmentFocusChanged?.Invoke(environment);
 
             return true;
         }

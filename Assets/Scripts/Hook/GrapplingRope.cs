@@ -29,7 +29,7 @@ public class GrapplingRope : MonoBehaviour
     private float _waveSize = 0;
     private float _moveTime = 0;
     private bool _straightLine = true;
-    private Platform _targetPlatform;
+    private Environment _target;
 
     public bool IsGrappling;
     public bool Affectable = false;
@@ -65,31 +65,22 @@ public class GrapplingRope : MonoBehaviour
     private void LinePointsToFirePoint()
     {
         for (int i = 0; i < _precision; i++)
-        {
             _lineRenderer.SetPosition(i, _grapplingHook.FirePoint.position);
-        }
     }
-
 
     private void DrawRope()
     {
         if (!_straightLine)
         {
             if (Math.Round(_lineRenderer.GetPosition(_precision - 1).x, 2) == Math.Round(_grapplingHook.GrapplePoint.x, 2))
-            {
                 _straightLine = true;
-            }
             else
-            {
-                DrawRopeWaves();
-            }
+                DrawRopeWavesInGrapple();
         }
         else
         {
-            if (_targetPlatform != null)
-            {
-                _targetPlatform.InitializeRopeConnection(this);
-            }
+            if (_target != null)
+                _target.InitializeRopeConnection(this);
 
             _grapplingHook.Grapple();
             IsGrappling = true;
@@ -97,20 +88,21 @@ public class GrapplingRope : MonoBehaviour
             if (_waveSize > 0)
             {
                 _waveSize -= Time.deltaTime * _straightenLineSpeed;
-                DrawRopeWaves();
+                DrawRopeWavesInGrapple();
             }
             else
             {
                 _waveSize = 0;
 
-                if (_lineRenderer.positionCount != 2) { _lineRenderer.positionCount = 2; }
+                if (_lineRenderer.positionCount != 2) 
+                    _lineRenderer.positionCount = 2;
 
                 DrawRopeNoWaves();
             }
         }
     }
 
-    private void DrawRopeWaves()
+    private void DrawRopeWavesInGrapple()
     {
         for (int i = 0; i < _precision; i++)
         {
@@ -129,8 +121,14 @@ public class GrapplingRope : MonoBehaviour
         _lineRenderer.SetPosition(1, _grapplingHook.GrapplePoint);
     }
 
+    private void DrawRopeWaves()
+    {
+        _lineRenderer.SetPosition(0, _grapplingHook.GrapplePoint);
+        _lineRenderer.SetPosition(1, _grapplingHook.FirePoint.position);
+    }
+
     private void OnPlatformFocusChanged(Environment environment)
     {
-        _targetPlatform = (Platform)environment;
+        _target = environment;
     }
 }

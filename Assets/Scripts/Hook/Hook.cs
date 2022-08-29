@@ -23,10 +23,13 @@ public class Hook : MonoBehaviour
     [SerializeField] private FocusingLaser _focusingLaser;
     [SerializeField] private PlatformTracker _platformTracker;
     [SerializeField] private Color _hookColor;
+    [SerializeField] private float _grapDelay;
 
     private Dictionary<Hook_Type, HookEngine> _hookTypesDic;
     private readonly EnvironmentToHookMatcherVisitor _platformVisitor = new EnvironmentToHookMatcherVisitor();
     private HookEngine _currentHookType;
+
+    private float _timeAfterLastShot = 0;
 
     private void Start()
     {
@@ -84,10 +87,12 @@ public class Hook : MonoBehaviour
     {
         if (Input.GetMouseButton(1))
         {
+            _timeAfterLastShot += Time.deltaTime;
             _focusingLaser.DrawStraightTrajectory(transform.position, false);
 
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0) && (_timeAfterLastShot >= _grapDelay))
             {
+                _timeAfterLastShot = 0;
                 _focusingLaser.DrawStraightTrajectory(transform.position, true);
                 _currentHookType.Enable();
             }

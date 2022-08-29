@@ -18,6 +18,16 @@ public class Enemy : Environment
 
     public override bool TryBreakConnection()
     {
-        return true;
+        if (_connectedRope)
+        {
+            if (_connectedRope.IsGrappling)
+            {
+                _connectedRope.Affectable = true;
+                _connectedRope.enabled = false;
+                return true;
+            }
+        }
+
+        return false;
     }
 }
