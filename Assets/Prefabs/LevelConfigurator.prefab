@@ -43,6 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34222acce35aa374ca4a8d232726f546, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 0}
-  _levelConfig: {fileID: 11400000, guid: 0dbf1d9790839bc418a3b5c2339ab44a, type: 2}
+  _levelConfig: {fileID: 11400000, guid: 6d2a7e0e3b1b66a4a85367bf21ac5b85, type: 2}
   _nextLevel: {fileID: 0}

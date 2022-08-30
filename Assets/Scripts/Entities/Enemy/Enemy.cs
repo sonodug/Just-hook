@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public abstract class Enemy : MonoBehaviour
 {
-    [SerializeField] protected Player Target;
+    [Inject] protected Player Target;
 
     protected IDamageable Health;
     protected IMovable Movement;

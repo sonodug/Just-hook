@@ -222,8 +222,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hook: {fileID: 1421380826100092225, guid: 8b36b89d348beb84582c9f4c910d2113, type: 3}
   _hookPivot: {fileID: 7650690939572464852}
-  _health: 0
-  _hookDamage: 0
+  _health: 20
+  _damage: 5
 --- !u!114 &2538139406949681946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 2538139406993438853}
   _runSpeed: 5
-  _boostSpeed: 40
 --- !u!1 &2538139406993438852
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +283,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 576
   _groundCheck: {fileID: 2538139406356029129}
   _groundedRadius: 0.2
 --- !u!1 &2538139407007569229

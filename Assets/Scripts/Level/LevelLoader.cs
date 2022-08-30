@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 public class LevelLoader : MonoBehaviour
 {
-    [SerializeField] private Player _player;
+    [Inject] private Player _player;
+
     [SerializeField] private LevelConfigurator _levelConfig;
     [SerializeField] private NextLevelZone _nextLevel;
 

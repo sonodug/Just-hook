@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlayerFollower : MonoBehaviour
 {
-    [SerializeField] private Player _target;
+    [Inject] private Player _target;
+
     [SerializeField] private float _smoothTime = 0.3f;
     [SerializeField] private float _trackX;
     [SerializeField] private float _trackY;

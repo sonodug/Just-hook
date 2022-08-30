@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 public class GemAmountView : MonoBehaviour
 {
+    [Inject] private Player _player;
+
     [SerializeField] private TMP_Text _score;
     [SerializeField] private TMP_Text _openLabel;
-    [SerializeField] private Player _player;
     [SerializeField] private NextLevelZone _nextLevel;
     [SerializeField] private LevelConfigurator _levelConfigurator;
 
