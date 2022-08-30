@@ -1,44 +1,41 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class PatrolMovement : MonoBehaviour, IMovable
 {
-    [SerializeField] private Transform _path;
+    [SerializeField] private Transform[] _waypoints;
     [SerializeField] private float _speed;
 
-    private Transform[] _points;
-    private int _currentPoint;
+    private Vector2[] _waypointsPosition;
+    private Rigidbody2D _rigidbody2D;
 
     private void Start()
     {
-        _points = new Transform[_path.childCount];
+        _waypointsPosition = ConvertToVectorArray(_waypoints);
+        _rigidbody2D = GetComponent<Rigidbody2D>();
 
-        for (int i = 0; i < _path.childCount; i++)
-        {
-            _points[i] = _path.GetChild(i);
-        }
-    }
-
-    private void Update()
-    {
         Move();
     }
 
     public void Move()
     {
-        Transform target = _points[_currentPoint];
+        Tween tween = _rigidbody2D.DOPath(_waypointsPosition, 100.0f / _speed, PathType.Linear).SetOptions(true);
 
-        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+        tween.SetEase(Ease.Linear).SetLoops(-1);
+    }
 
-        if (transform.position == target.position)
+    private Vector2[] ConvertToVectorArray(Transform[] array)
+    {
+        Vector2[] vectorArray = new Vector2[array.Length];
+
+        for (int i = 0; i < array.Length; i++)
         {
-            _currentPoint++;
-
-            if (_currentPoint >= _points.Length)
-            {
-                _currentPoint = 0;
-            }
+            vectorArray[i] = array[i].position;
         }
+
+        return vectorArray;
     }
 }

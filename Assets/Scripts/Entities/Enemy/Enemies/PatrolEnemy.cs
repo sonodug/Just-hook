@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(PatrolMovement), typeof(Rigidbody2D))]
+[RequireComponent(typeof(PatrolMovement))]
 public class PatrolEnemy : Enemy
 {
     [SerializeField] private float _health;

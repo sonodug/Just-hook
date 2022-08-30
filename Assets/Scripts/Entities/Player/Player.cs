@@ -50,7 +50,7 @@ public class Player : MonoBehaviour
     public void ApplyDamage(float damage)
     {
         _health -= damage;
-        _rigidbody.AddForce(Vector2.up * 400);
+        _rigidbody.AddForce(new Vector2(Random.Range(-1, 1), 1) * 400);
 
         if (_health <= 0)
         {

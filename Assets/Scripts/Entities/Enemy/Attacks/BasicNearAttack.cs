@@ -19,5 +19,6 @@ public class BasicNearAttack : IAttackable
         //Attack animation
         Debug.Log("Enemy attacks");
         _target.ApplyDamage(_damage);
+        //via Visitor
     }
 }
