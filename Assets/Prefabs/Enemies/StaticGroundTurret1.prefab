@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1161743521704444558}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4905166, y: 3.0942528, z: 0}
+  m_LocalPosition: {x: -0.4905166, y: -0.058, z: 0}
   m_LocalScale: {x: 3.227079, y: 9.491575, z: 1}
   m_Children: []
   m_Father: {fileID: 6310449996611283366}
@@ -55,7 +55,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1631088993389823391}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.655, y: -0.075, z: 0}
+  m_LocalPosition: {x: -0.655, y: -0.192, z: 0}
   m_LocalScale: {x: 0.30987775, y: 0.10535659, z: 1}
   m_Children:
   - {fileID: 2079204913535603217}
@@ -167,7 +167,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2648177725105310712}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.4905166, y: 1.4711934, z: 0}
+  m_LocalPosition: {x: -0.4905166, y: -0.029, z: 0}
   m_LocalScale: {x: 3.227079, y: 9.491575, z: 1}
   m_Children: []
   m_Father: {fileID: 5668079125020208269}
@@ -281,7 +281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7816264807403424542}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.655, y: 0.096, z: 0}
+  m_LocalPosition: {x: -0.655, y: 0.036, z: 0}
   m_LocalScale: {x: 0.30987775, y: 0.10535659, z: 1}
   m_Children:
   - {fileID: 8475591721839920315}
@@ -354,7 +354,7 @@ GameObject:
   - component: {fileID: 8564532304558338629}
   - component: {fileID: 5955599202557585487}
   m_Layer: 9
-  m_Name: StaticGroundTurret
+  m_Name: StaticGroundTurret1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -499,7 +499,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8127572a14331d349b11fe4a179334cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Target: {fileID: 0}
   _bulletTemplate: {fileID: 5389696443977564121, guid: 78ae0821ca34dd842b28d324c7503978, type: 3}
   _shootPoints:
   - {fileID: 2539467005094966001}
@@ -507,4 +506,4 @@ MonoBehaviour:
   - {fileID: 8475591721839920315}
   _health: 10
   _observeRadius: 11.16
-  _delayBetweenShots: 1
+  _delayBetweenShots: 3

@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(InstantiateBulletProvider))]
-public class StaticGroundTurret : Enemy
+public class WallMountedStaticTurret : Enemy
 {
-    [SerializeField] private BasicBullet _bulletTemplate;
-    [SerializeField] private Transform[] _shootPoints;
+    [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _health;
     [SerializeField] private float _observeRadius;
     [SerializeField] private float _delayBetweenShots;
@@ -54,7 +54,7 @@ public class StaticGroundTurret : Enemy
     {
         _eventHealth = new Health(new NormalDyingPolicy(), _health);
         Health = _eventHealth;
-        Attackable = new BurstOfShellsAttack(_bulletTemplate, _shootPoints, _provider);
+        Attackable = new ShootTargetWithInterval(_bulletTemplate, _shootPoint, _provider, Target);
     }
 
     private void OnHookConnected()
