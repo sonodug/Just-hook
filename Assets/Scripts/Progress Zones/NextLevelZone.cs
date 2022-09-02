@@ -6,6 +6,7 @@ using UnityEngine.Events;
 public class NextLevelZone : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer _spriteRenderer;
+    [SerializeField] private Color _passOpenColor;
     [SerializeField] private LevelLoader _levelLoader;
 
     private bool _isExitUnlock;
@@ -35,6 +36,6 @@ public class NextLevelZone : MonoBehaviour
         _colider.isTrigger = true;
         _isExitUnlock = true;
         ExitUnlocked?.Invoke();
-        _spriteRenderer.color = Color.green;
+        _spriteRenderer.color = _passOpenColor;
     }
 }

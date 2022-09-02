@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 185848047458569139}
-  m_LocalRotation: {x: 0, y: 0, z: 0.2588191, w: 0.9659258}
-  m_LocalPosition: {x: -0.256, y: -0.23, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.139, y: 0.01, z: 0}
   m_LocalScale: {x: 0.30987775, y: 0.10535659, z: 1}
   m_Children: []
   m_Father: {fileID: 9170319361460117832}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 30}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &5306575075885209071
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 957cdaafad3e03c44aa5ef57dba8afa7, type: 3}
   m_Color: {r: 0.11320752, g: 0.094517596, b: 0.094517596, a: 1}
   m_FlipX: 0
@@ -95,8 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa716da798593d54787dbd00af92a4e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rotationSpeed: 0
-  _gunPivot: {fileID: 0}
+  _rotationSpeed: 20
+  _gunPivot: {fileID: 9170319361460117832}
 --- !u!1 &795616961817646117
 GameObject:
   m_ObjectHideFlags: 0
@@ -121,7 +121,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 795616961817646117}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -0.3, z: 0}
+  m_LocalPosition: {x: -0.463, y: -0.467, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2125702252024666519}
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletTemplate: {fileID: 7149087083893981467, guid: a02d8cc4502ae814fa482d05b352e4c0, type: 3}
-  _weaponRotator: {fileID: 0}
+  _weaponRotator: {fileID: 2706036297655731839}
   _shootPoint: {fileID: 8133792988391733728}
   _health: 10
   _observeRadius: 17
