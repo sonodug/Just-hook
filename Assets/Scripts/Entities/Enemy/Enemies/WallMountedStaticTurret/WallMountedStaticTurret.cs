@@ -6,6 +6,7 @@ using UnityEngine;
 public class WallMountedStaticTurret : Enemy
 {
     [SerializeField] private Bullet _bulletTemplate;
+    [SerializeField] private WeaponRotator _weaponRotator;
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private float _health;
     [SerializeField] private float _observeRadius;
@@ -30,6 +31,8 @@ public class WallMountedStaticTurret : Enemy
 
         if (Vector3.Distance(transform.position, Target.gameObject.transform.position) < _observeRadius)
         {
+            _weaponRotator.RotateWeapon(Target.gameObject.transform.position);
+
             if (_delay >= _delayBetweenShots)
             {
                 Attackable.Attack();

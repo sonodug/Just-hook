@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 5
-  Speed: 1
+  Speed: 5
   Direction: {x: 0, y: 0}
   ShotEffect: {fileID: 0}
   ExplosionEffect: {fileID: 0}

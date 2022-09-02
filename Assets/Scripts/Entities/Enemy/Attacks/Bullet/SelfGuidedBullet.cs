@@ -5,12 +5,14 @@ using Zenject;
 
 public class SelfGuidedBullet : Bullet
 {
+    [Inject] private Player target;
+
     private void Start()
     {
-        Vector3 rotation = new Vector3(transform.rotation.eulerAngles.x, 0, 0);
-        //transform.rotation = Quaternion.Euler(rotation);
+        Direction = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
 
-        //fix rotation
+        transform.rotation = Quaternion.Euler(0, 0, angle);
     }
 
     private void Update()
@@ -23,13 +25,17 @@ public class SelfGuidedBullet : Bullet
         if (collision.gameObject.TryGetComponent<Player>(out Player player))
         {
             player.ApplyDamage(Damage);
+            gameObject.SetActive(false);
         }
+    }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
         gameObject.SetActive(false);
     }
 
     public override void Move()
     {
-        transform.Translate(Speed * Time.deltaTime * Vector3.forward);
+        transform.Translate(Speed * Time.deltaTime * Vector2.right);
     }
 }

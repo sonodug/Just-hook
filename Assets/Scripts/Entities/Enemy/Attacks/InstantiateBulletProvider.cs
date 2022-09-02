@@ -9,8 +9,7 @@ public class InstantiateBulletProvider : MonoBehaviour
 
     public void Instantiate(Bullet bullet, Transform shootPoint, Player target)
     {
-        Vector3 dir = target.transform.position - shootPoint.position;
-        _container.InstantiatePrefab(bullet, shootPoint.position, Quaternion.LookRotation(dir.normalized), shootPoint);
+        _container.InstantiatePrefab(bullet, shootPoint.position, target.gameObject.transform.rotation, shootPoint);
     }
     
     public void Instantiate(Bullet bullet, Transform shootPoint)
