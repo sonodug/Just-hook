@@ -4,25 +4,39 @@ using IJunior.TypedScenes;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
+using Zenject.SpaceFighter;
 
 public class LevelLoader : MonoBehaviour
 {
     [Inject] private Player _player;
+    [Inject] private DiContainer _container;
 
     [SerializeField] private LevelConfigurator _levelConfig;
     [SerializeField] private NextLevelZone _nextLevel;
+    [SerializeField] private List<Transform> _controlPoints;
+    [SerializeField] private float _playerDieTransitionSpeed;
 
     //levelInfo
     private int _gemsCollectedAmount;
+    private Transform _currentControlPoint;
+    private int _currentControlPointIndex;
+
+    private void Start()
+    {
+        _currentControlPoint = _controlPoints[0];
+        _currentControlPointIndex = 0;
+    }
 
     private void OnEnable()
     {
         _player.LevelScoreChanged += OnLevelScoreChanged;
+        _player.ControlPointChanged += OnControlPointChanged;
     }
 
     private void OnDisable()
     {
         _player.LevelScoreChanged -= OnLevelScoreChanged;
+        _player.ControlPointChanged -= OnControlPointChanged;
     }
 
     private void OnLevelScoreChanged()
@@ -35,6 +49,12 @@ public class LevelLoader : MonoBehaviour
         }
     }
 
+    private void OnControlPointChanged(Transform controlPoint)
+    {
+        _currentControlPoint = controlPoint;
+        Debug.Log("a");
+    }
+
     public void LoadNextLevel()
     {
         //GameManager => get next level, => load
@@ -45,6 +65,12 @@ public class LevelLoader : MonoBehaviour
     public void ReloadLevel()
     {
         //Test_Level1.Load();
+        //control point
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ReloadPlayerWithControlPoint()
+    {
+        _player.transform.position = Vector2.MoveTowards(_currentControlPoint.position, transform.position, 0);
     }
 }

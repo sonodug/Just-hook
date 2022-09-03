@@ -20,6 +20,8 @@ public class FocusingLaser : MonoBehaviour
     private Vector3[] _points;
     private Vector3 _targetPosition;
 
+    private GrappleApplyIndicator _indicator;
+
     public Vector2 JointVector => _targetPosition - transform.position;
 
     private void Start()
@@ -29,6 +31,9 @@ public class FocusingLaser : MonoBehaviour
         _lineRenderer.enabled = false;
 
         _platformTracker.EnvironmentFocusChanged += OnPlatformFocusChanged;
+
+        _indicator = GetComponentInChildren<GrappleApplyIndicator>();
+        _indicator.gameObject.SetActive(false);
         //SetSegments();
     }
 
@@ -97,11 +102,13 @@ public class FocusingLaser : MonoBehaviour
             else
             {
                 _lineRenderer.enabled = false;
+                _indicator.gameObject.SetActive(false);
             }
         }
         else
         {
             _lineRenderer.enabled = false;
+            _indicator.gameObject.SetActive(false);
         }
     }
 
@@ -124,10 +131,14 @@ public class FocusingLaser : MonoBehaviour
     public void Disable()
     {
         _lineRenderer.enabled = false;
+        _indicator.gameObject.SetActive(false);
     }
 
     public void SetLaserColor(Color color)
     {
+        if (color != Color.white)
+            _indicator.gameObject.SetActive(true);
+
         Color setColor = color;
         _lineRenderer.startColor = setColor;
         _lineRenderer.endColor = setColor;

@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
     {
         if (collision.gameObject.TryGetComponent<Player>(out Player player))
         {
-            _levelLoader.ReloadLevel();
+            _levelLoader.ReloadPlayerWithControlPoint();
         }
     }
 }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using Zenject;
 
 public class GemAmountView : MonoBehaviour
@@ -9,7 +10,7 @@ public class GemAmountView : MonoBehaviour
     [Inject] private Player _player;
 
     [SerializeField] private TMP_Text _score;
-    [SerializeField] private TMP_Text _openLabel;
+    [SerializeField] private Image _openLabel;
     [SerializeField] private NextLevelZone _nextLevel;
     [SerializeField] private LevelConfigurator _levelConfigurator;
 
@@ -42,6 +43,7 @@ public class GemAmountView : MonoBehaviour
 
     private void OnExitUnlocked()
     {
+        _openLabel.gameObject.SetActive(true);
         _openLabel.enabled = true;
     }
 }

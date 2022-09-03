@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
     public float Damage => _damage;
 
     public event UnityAction LevelScoreChanged;
+    public event UnityAction<Transform> ControlPointChanged;
     public event UnityAction Died;
 
     private void Awake()
@@ -44,6 +45,10 @@ public class Player : MonoBehaviour
             
             gem.gameObject.SetActive(false);
             gem.enabled = false;
+        }
+        else if (collision.gameObject.TryGetComponent<ControlPoint>(out ControlPoint controlPoint))
+        {
+            ControlPointChanged?.Invoke(controlPoint.transform);
         }
     }
 
