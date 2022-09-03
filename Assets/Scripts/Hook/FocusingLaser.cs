@@ -138,6 +138,8 @@ public class FocusingLaser : MonoBehaviour
     {
         if (color != Color.white)
             _indicator.gameObject.SetActive(true);
+        else if (color == Color.white)
+            _indicator.gameObject.SetActive(false);
 
         Color setColor = color;
         _lineRenderer.startColor = setColor;

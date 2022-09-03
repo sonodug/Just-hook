@@ -16,7 +16,6 @@ public class NextLevelZone : MonoBehaviour
 
     private void Start()
     {
-        _spriteRenderer.color = Color.red;
         _colider = GetComponent<BoxCollider2D>();
     }
 

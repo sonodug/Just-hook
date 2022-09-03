@@ -31,12 +31,14 @@ public class LevelLoader : MonoBehaviour
     {
         _player.LevelScoreChanged += OnLevelScoreChanged;
         _player.ControlPointChanged += OnControlPointChanged;
+        _player.Died += OnPlayerDied;
     }
 
     private void OnDisable()
     {
         _player.LevelScoreChanged -= OnLevelScoreChanged;
         _player.ControlPointChanged -= OnControlPointChanged;
+        _player.Died -= OnPlayerDied;
     }
 
     private void OnLevelScoreChanged()
@@ -53,6 +55,11 @@ public class LevelLoader : MonoBehaviour
     {
         _currentControlPoint = controlPoint;
         Debug.Log("a");
+    }
+
+    private void OnPlayerDied()
+    {
+        ReloadPlayerWithControlPoint();
     }
 
     public void LoadNextLevel()
