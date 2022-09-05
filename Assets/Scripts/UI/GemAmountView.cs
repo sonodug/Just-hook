@@ -10,6 +10,7 @@ public class GemAmountView : MonoBehaviour
     [Inject] private Player _player;
 
     [SerializeField] private TMP_Text _score;
+    [SerializeField] private TMP_Text _gemsCollectedLabel;
     [SerializeField] private Image _openLabel;
     [SerializeField] private NextLevelZone _nextLevel;
     [SerializeField] private LevelConfigurator _levelConfigurator;
@@ -25,9 +26,11 @@ public class GemAmountView : MonoBehaviour
         _score.text = $"{_collected} / {_amount}";
 
         _player.LevelScoreChanged += OnLevelScoreChanged;
+
         _nextLevel.ExitUnlocked += OnExitUnlocked;
 
         _openLabel.enabled = false;
+        _gemsCollectedLabel.enabled = false;
     }
 
     private void OnDisable()
@@ -39,6 +42,9 @@ public class GemAmountView : MonoBehaviour
     {
         _collected++;
         _score.text = $"{_collected} / {_amount}";
+
+        _gemsCollectedLabel.gameObject.SetActive(true);
+        _gemsCollectedLabel.enabled = true;
     }
 
     private void OnExitUnlocked()

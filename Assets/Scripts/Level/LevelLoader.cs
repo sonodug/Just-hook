@@ -54,7 +54,6 @@ public class LevelLoader : MonoBehaviour
     private void OnControlPointChanged(Transform controlPoint)
     {
         _currentControlPoint = controlPoint;
-        Debug.Log("a");
     }
 
     private void OnPlayerDied()

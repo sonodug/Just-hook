@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _damage;
 
     private Rigidbody2D _rigidbody;
-    private float _currentHealth;
+    private float _maxHealth;
     private int _overallScoreAmount;
     private int _currentGemsCollected;
     private int _gemsCollectToFinish; //GameManager should initialize this and others values
@@ -20,12 +20,14 @@ public class Player : MonoBehaviour
     public float Damage => _damage;
 
     public event UnityAction LevelScoreChanged;
+    public event UnityAction<float, float> HealthChanged;
     public event UnityAction<Transform> ControlPointChanged;
     public event UnityAction Died;
 
     private void Awake()
     {
         Instantiate(_hook, _hookPivot);
+
         _rigidbody = GetComponent<Rigidbody2D>();
         _currentGemsCollected = 0;
     }
@@ -33,7 +35,7 @@ public class Player : MonoBehaviour
     private void Start()
     {
         //DontDestroyOnLoad(gameObject);
-        _currentHealth = _health;
+        _maxHealth = _health;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -54,15 +56,26 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent<Obstacle>(out Obstacle obstacle))
+        {
+            HealthChanged?.Invoke(0, _maxHealth);
+            Died?.Invoke();
+        }
+    }
+
     public void ApplyDamage(float damage)
     {
         _health -= damage;
+        HealthChanged?.Invoke(_health, _maxHealth);
+
         _rigidbody.AddForce(new Vector2(Random.Range(-1, 1), 1) * 200);
 
         if (_health <= 0)
         {
             Died?.Invoke();
-            _health = _currentHealth;
+            _health = _maxHealth;
         }
 
         Debug.Log("Player get damage");

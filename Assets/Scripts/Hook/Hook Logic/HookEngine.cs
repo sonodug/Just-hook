@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public abstract class HookEngine : MonoBehaviour
 {
@@ -16,6 +17,7 @@ public abstract class HookEngine : MonoBehaviour
     protected bool IsReadyToMove = false;
 
     private Camera _camera;
+    private Player _hookHolder;
 
     private Transform _hookPivot;
     protected Transform HookHolder;
@@ -31,6 +33,10 @@ public abstract class HookEngine : MonoBehaviour
 
     public Transform FirePoint => ShotPoint;
 
+    private void Awake()
+    {
+        _hookHolder = GetComponentInParent<Player>();
+    }
 
     private void Start()
     {
@@ -46,6 +52,16 @@ public abstract class HookEngine : MonoBehaviour
 
         GrapplingRope.enabled = false;
         SpringJoint2D.enabled = false;
+    }
+
+    private void OnEnable()
+    {
+        _hookHolder.Died += OnHookHolderDied;
+    }
+
+    private void OnDisable()
+    {
+        _hookHolder.Died -= OnHookHolderDied;
     }
 
     private void Update()
@@ -131,6 +147,20 @@ public abstract class HookEngine : MonoBehaviour
         Rigidbody.gravityScale = 1;
 
         MoveHookHolderAfterLaunch();
+    }
+
+    public void DisableWithoutMoving()
+    {
+        IsReadyToMove = false;
+        GrapplingRope.enabled = false;
+        SpringJoint2D.enabled = false;
+        Rigidbody.gravityScale = 1;
+    }
+
+    public void OnHookHolderDied()
+    {
+        DisableWithoutMoving();
+        Debug.Log("disable");
     }
 
     public abstract void Grapple();

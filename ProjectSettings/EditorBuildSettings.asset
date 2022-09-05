@@ -12,19 +12,19 @@ EditorBuildSettings:
     path: Assets/Scenes/ScenePhysics.unity
     guid: 40a541015fb40fc4d8ed84d0b0a7017d
   - enabled: 1
-    path: Assets/Scenes/Test_Level1.unity
+    path: Assets/Scenes/Demo_Level1.unity
     guid: 96faabf97ce50124ea87abb73ed7451a
   - enabled: 1
-    path: Assets/Scenes/Test_Level2.unity
+    path: Assets/Scenes/Demo_Level2.unity
     guid: e852ab7efda9172409a449733680693c
   - enabled: 1
-    path: Assets/Scenes/Test_Level4.unity
+    path: Assets/Scenes/Demo_Level4.unity
     guid: 87fe65490f2d40344aba965c6b4a8e52
   - enabled: 1
-    path: Assets/Scenes/Test_Level3.unity
+    path: Assets/Scenes/Demo_Level3.unity
     guid: 4e38d914c0635434f86474426356141e
   - enabled: 1
-    path: Assets/Scenes/Test_Level5_enemies_.unity
+    path: Assets/Scenes/Demo_Level5.unity
     guid: d7da06cc51139be43919c79a7557120f
   - enabled: 1
     path: Assets/AssetsPackages/Free 2D Cartoon Parallax Background/Demo/Scenes/Demo_Scene.unity
