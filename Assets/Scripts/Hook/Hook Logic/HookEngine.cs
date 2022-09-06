@@ -160,7 +160,6 @@ public abstract class HookEngine : MonoBehaviour
     public void OnHookHolderDied()
     {
         DisableWithoutMoving();
-        Debug.Log("disable");
     }
 
     public abstract void Grapple();

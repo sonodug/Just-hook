@@ -9,22 +9,19 @@ using Zenject.SpaceFighter;
 public class LevelLoader : MonoBehaviour
 {
     [Inject] private Player _player;
-    [Inject] private DiContainer _container;
+    [Inject] private NextLevelZone _nextLevelZone;
 
     [SerializeField] private LevelConfigurator _levelConfig;
-    [SerializeField] private NextLevelZone _nextLevel;
-    [SerializeField] private List<Transform> _controlPoints;
+    [SerializeField] private Transform _startControlPoint;
     [SerializeField] private float _playerDieTransitionSpeed;
 
     //levelInfo
     private int _gemsCollectedAmount;
     private Transform _currentControlPoint;
-    private int _currentControlPointIndex;
 
     private void Start()
     {
-        _currentControlPoint = _controlPoints[0];
-        _currentControlPointIndex = 0;
+        _currentControlPoint = _startControlPoint;
     }
 
     private void OnEnable()
@@ -45,9 +42,11 @@ public class LevelLoader : MonoBehaviour
     {
         _gemsCollectedAmount++;
 
+
+
         if (_gemsCollectedAmount == _levelConfig.GemsCollectToFinish)
         {
-            _nextLevel.UnlockExit();
+            _nextLevelZone.UnlockExit();
         }
     }
 

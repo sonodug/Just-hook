@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class NextLevelZone : MonoBehaviour
 {
+    [Inject] private LevelLoader _levelLoader;
+
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private Color _passOpenColor;
-    [SerializeField] private LevelLoader _levelLoader;
 
     private bool _isExitUnlock;
     private BoxCollider2D _colider;

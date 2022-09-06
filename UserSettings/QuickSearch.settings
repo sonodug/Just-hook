@@ -3,7 +3,7 @@ fetchPreview = true
 wantsMore = true
 dockable = false
 debug = false
-itemIconSize = 1
+itemIconSize = 0
 queryFolder = "Assets/Editor/Queries"
 onBoardingDoNotAskAgain = true
 showPackageIndexes = false
@@ -17,6 +17,7 @@ filters = {
 }
 scopes = {
 	"last_search.AB59B443" = ""
+	"last_search.000006DE" = ""
 }
 providers = {
 	asset = {
