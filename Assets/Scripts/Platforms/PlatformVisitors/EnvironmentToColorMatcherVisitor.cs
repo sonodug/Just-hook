@@ -13,7 +13,7 @@ public class EnvironmentToColorMatcherVisitor : IEnvironmentVisitor
 
     public void Visit(PhysicsPlatform physicsPlatform)
     {
-        _laser.SetLaserColor(Color.black);
+        _laser.SetLaserColor(Color.red);
     }
 
     public void Visit(BouncePlatform bouncePlatform)
@@ -28,7 +28,7 @@ public class EnvironmentToColorMatcherVisitor : IEnvironmentVisitor
 
     public void Visit(EnemyEnvironment enemy)
     {
-        _laser.SetLaserColor(Color.red);
+        _laser.SetLaserColor(Color.black);
     }
 
     public void Init(FocusingLaser laser)

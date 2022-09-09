@@ -139,9 +139,9 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: b96e6cc5383702a4ca92853d0dc10d83, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.49056602, g: 0.122178696, b: 0.12544669, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -222,8 +222,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hook: {fileID: 1421380826100092225, guid: 8b36b89d348beb84582c9f4c910d2113, type: 3}
   _hookPivot: {fileID: 7650690939572464852}
-  _health: 0
-  _hookDamage: 0
+  _healthCount: 3
+  _damage: 5
+  _diedDelayTransition: 1
 --- !u!114 &2538139406949681946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,7 +239,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _controller: {fileID: 2538139406993438853}
   _runSpeed: 5
-  _boostSpeed: 40
 --- !u!1 &2538139406993438852
 GameObject:
   m_ObjectHideFlags: 0
@@ -284,7 +284,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _groundLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 832
   _groundCheck: {fileID: 2538139406356029129}
   _groundedRadius: 0.2
 --- !u!1 &2538139407007569229

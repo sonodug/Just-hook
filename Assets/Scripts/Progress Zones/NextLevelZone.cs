@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using Zenject;
 
 public class NextLevelZone : MonoBehaviour
 {
+    [Inject] private LevelLoader _levelLoader;
+
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private LevelLoader _levelLoader;
+    [SerializeField] private Color _passOpenColor;
 
     private bool _isExitUnlock;
     private BoxCollider2D _colider;
@@ -15,7 +18,6 @@ public class NextLevelZone : MonoBehaviour
 
     private void Start()
     {
-        _spriteRenderer.color = Color.red;
         _colider = GetComponent<BoxCollider2D>();
     }
 
@@ -35,6 +37,6 @@ public class NextLevelZone : MonoBehaviour
         _colider.isTrigger = true;
         _isExitUnlock = true;
         ExitUnlocked?.Invoke();
-        _spriteRenderer.color = Color.green;
+        _spriteRenderer.color = _passOpenColor;
     }
 }

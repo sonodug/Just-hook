@@ -8,13 +8,6 @@ public class PlayerMovementController : MonoBehaviour
 	[SerializeField] private float _groundedRadius = 0.2f;
 
 	private bool _isGrounded;
-	private Rigidbody2D _rigidBody;
-	private bool _isFacingRight = true;
-
-	private void Awake()
-	{
-		_rigidBody = GetComponentInParent<Rigidbody2D>();
-	}
 
 	private void FixedUpdate()
 	{

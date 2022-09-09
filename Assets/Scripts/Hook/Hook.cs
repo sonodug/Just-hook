@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
+using Zenject;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class Hook : MonoBehaviour
@@ -45,7 +47,6 @@ public class Hook : MonoBehaviour
         }
 
         _currentHookType = _hookTypes[0];
-
     }
 
     private void Update()
@@ -58,6 +59,11 @@ public class Hook : MonoBehaviour
         _platformTracker.EnvironmentFocusChangedWithChangable -= OnPlatformFocusChanged;
     }
 
+    private void OnPlatformFocusChanged(Environment environment)
+    {
+        environment.Accept(_platformVisitor);
+    }
+
     public void FillDictionary()
     {
         _hookTypesDic = new Dictionary<Hook_Type, HookEngine>();
@@ -66,11 +72,6 @@ public class Hook : MonoBehaviour
         {
             _hookTypesDic.Add(_hook_Types[i], _hookTypes[i]);
         }
-    }
-
-    private void OnPlatformFocusChanged(Environment environment)
-    {
-        environment.Accept(_platformVisitor);
     }
 
     public void SetCurrentHook(Hook_Type hook_Type)

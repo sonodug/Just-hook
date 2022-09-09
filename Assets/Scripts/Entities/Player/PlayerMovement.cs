@@ -6,7 +6,6 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private PlayerMovementController _controller;
     [SerializeField] private float _runSpeed = 10.0f;
-    [SerializeField] private float _boostSpeed = 40.0f;
 
     private Vector3 _movementVector
     {

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e0d799e0aba284daaf4020c2ab7902, type: 3}
   m_Name: lvl3
   m_EditorClassIdentifier: 
-  _gemsCollectToFinish: 2
+  _gemsCollectToFinish: 4
