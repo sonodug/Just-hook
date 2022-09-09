@@ -33,8 +33,6 @@ public class Hook : MonoBehaviour
 
     private float _timeAfterLastShot = 0;
 
-    public event UnityAction PlayerMovementLocked;
-
     private void Start()
     {
         _platformTracker.EnvironmentFocusChangedWithChangable += OnPlatformFocusChanged;

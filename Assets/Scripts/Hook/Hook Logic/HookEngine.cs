@@ -154,7 +154,8 @@ public abstract class HookEngine : MonoBehaviour
         IsReadyToMove = false;
         GrapplingRope.enabled = false;
         SpringJoint2D.enabled = false;
-        Rigidbody.gravityScale = 1;
+        Rigidbody.gravityScale = 1f;
+        Rigidbody.velocity = Vector2.zero;
     }
 
     public void OnHookHolderDied()

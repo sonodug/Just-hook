@@ -222,8 +222,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hook: {fileID: 1421380826100092225, guid: 8b36b89d348beb84582c9f4c910d2113, type: 3}
   _hookPivot: {fileID: 7650690939572464852}
-  _health: 20
+  _healthCount: 3
   _damage: 5
+  _diedDelayTransition: 1
 --- !u!114 &2538139406949681946
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -281,7 +282,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccb3580a89e553409c128bd9dae2871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hook: {fileID: 1421380826100092225, guid: 8b36b89d348beb84582c9f4c910d2113, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 832

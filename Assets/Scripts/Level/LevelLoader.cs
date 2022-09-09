@@ -74,8 +74,10 @@ public class LevelLoader : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void ReloadPlayerWithControlPoint()
+    public async void ReloadPlayerWithControlPoint()
     {
         _player.transform.position = Vector2.MoveTowards(_currentControlPoint.position, transform.position, 0);
+
+        await _player.Unfade();
     }
 }

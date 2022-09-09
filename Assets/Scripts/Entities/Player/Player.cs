@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -8,8 +10,9 @@ public class Player : MonoBehaviour
 {
     [SerializeField] private Hook _hook;
     [SerializeField] private Transform _hookPivot;
-    [SerializeField] private float _health;
+    [SerializeField] private float _healthCount;
     [SerializeField] private float _damage;
+    [SerializeField] private float _diedDelayTransition;
 
     private Rigidbody2D _rigidbody;
     private float _maxHealth;
@@ -17,10 +20,13 @@ public class Player : MonoBehaviour
     private int _currentGemsCollected;
     private int _gemsCollectToFinish; //GameManager should initialize this and others values
 
+    private SpriteRenderer _renderer;
+
     public float Damage => _damage;
 
     public event UnityAction LevelScoreChanged;
-    public event UnityAction<float, float> HealthChanged;
+    //public event UnityAction<float, float> HealthChanged;
+    public event UnityAction HealthChanged;
     public event UnityAction<Transform> ControlPointChanged;
     public event UnityAction Died;
 
@@ -34,8 +40,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        _renderer = GetComponent<SpriteRenderer>();
+
         //DontDestroyOnLoad(gameObject);
-        _maxHealth = _health;
+        _maxHealth = _healthCount;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -56,28 +64,60 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private async void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent<Obstacle>(out Obstacle obstacle))
         {
-            HealthChanged?.Invoke(0, _maxHealth);
+            await Fade();
+
+            //HealthChanged?.Invoke(0, _maxHealth);
             Died?.Invoke();
         }
     }
 
-    public void ApplyDamage(float damage)
+    public async void ApplyDamage(float damage)
     {
-        _health -= damage;
-        HealthChanged?.Invoke(_health, _maxHealth);
+        _healthCount -= 1;
+        //HealthChanged?.Invoke(_health, _maxHealth);
+        HealthChanged?.Invoke();
 
-        _rigidbody.AddForce(new Vector2(Random.Range(-1, 1), 1) * 200);
-
-        if (_health <= 0)
+        if (_healthCount <= 0)
         {
-            Died?.Invoke();
-            _health = _maxHealth;
-        }
+            await Fade();
 
-        Debug.Log("Player get damage");
+            Died?.Invoke();
+
+            _healthCount = _maxHealth;
+        }
+        else
+        {
+            _rigidbody.AddForce(new Vector2(Random.Range(-1, 1), 1) * 200);
+        }
+    }
+
+    public async Task Fade()
+    {
+        Color color = _renderer.color;
+
+        for (float alpha = _diedDelayTransition; alpha >= 0f; alpha -= 0.005f)
+        {
+            color.a = alpha;
+            _renderer.color = color;
+
+            await Task.Yield();
+        }
+    }
+
+    public async Task Unfade()
+    {
+        Color color = _renderer.color;
+
+        for (float alpha = 0f; alpha <= _diedDelayTransition; alpha += 0.005f)
+        {
+            color.a = alpha;
+            _renderer.color = color;
+
+            await Task.Yield();
+        }
     }
 }

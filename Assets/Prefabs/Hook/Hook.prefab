@@ -623,7 +623,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: _maxDistance
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: _platformTracker
@@ -661,6 +661,10 @@ PrefabInstance:
     - target: {fileID: 2578412935093921716, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: m_Name
       value: TransporterHookType
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
+      propertyPath: _maxDistance
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _transportSpeed
@@ -834,7 +838,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: _maxDistance
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1701626340878660242, guid: 39f41f50a35e6ce4ea7576991d2a0b10, type: 3}
       propertyPath: _platformTracker
@@ -938,8 +942,12 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
+      propertyPath: _jumpForce
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _maxDistance
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2164465906167534923, guid: dfddcc44b9de9a541bdad673e8c4610e, type: 3}
       propertyPath: _platformTracker
