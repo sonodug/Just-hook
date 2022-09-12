@@ -64,7 +64,7 @@ public class Hook : MonoBehaviour
         environment.Accept(_platformVisitor);
     }
 
-    public void FillDictionary()
+    private void FillDictionary()
     {
         _hookTypesDic = new Dictionary<Hook_Type, HookEngine>();
 
@@ -91,20 +91,14 @@ public class Hook : MonoBehaviour
             _timeAfterLastShot += Time.deltaTime;
             _focusingLaser.DrawStraightTrajectory(transform.position, false);
 
-            if (Input.GetMouseButtonDown(0) && (_timeAfterLastShot >= _grapDelay))
-            {
-                _timeAfterLastShot = 0;
-                _focusingLaser.DrawStraightTrajectory(transform.position, true);
-                _currentHookType.Enable();
-            }
+            if (!Input.GetMouseButtonDown(0) || (!(_timeAfterLastShot >= _grapDelay))) return;
+            _timeAfterLastShot = 0;
+            _focusingLaser.DrawStraightTrajectory(transform.position, true);
+            _currentHookType.Enable();
         }
         else if (Input.GetMouseButtonUp(1))
-        {
             _focusingLaser.Disable();
-        }
         else if(Input.GetKeyDown(KeyCode.Space))
-        {
             _currentHookType.Disable();
-        }
     }
 }

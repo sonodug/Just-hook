@@ -1,14 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
+using Progress_Zones;
 using UnityEngine;
 using Zenject;
 
-public class NextLevelZoneInstaller : MonoInstaller
+namespace System.Installers
 {
-    [SerializeField] private NextLevelZone _nextLevelZone;
-
-    public override void InstallBindings()
+    public class NextLevelZoneInstaller : MonoInstaller
     {
-        Container.Bind<NextLevelZone>().FromInstance(_nextLevelZone).AsSingle().NonLazy();
+        [SerializeField] private NextLevelZone _nextLevelZone;
+        
+        public override void InstallBindings()
+        {
+            Container.Bind<NextLevelZone>().FromInstance(_nextLevelZone).AsSingle().NonLazy();
+        }
     }
 }

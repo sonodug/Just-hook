@@ -22,7 +22,7 @@ public class FocusingLaser : MonoBehaviour
 
     private GrappleApplyIndicator _indicator;
 
-    public Vector2 JointVector => _targetPosition - transform.position;
+    private Vector2 JointVector => _targetPosition - transform.position;
 
     private void Start()
     {

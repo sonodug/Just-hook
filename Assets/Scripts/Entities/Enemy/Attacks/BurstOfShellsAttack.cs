@@ -1,28 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
-public class BurstOfShellsAttack : IAttackable
+namespace Entities.Enemy.Attacks
 {
-    //Animator
-    //Coroutine
-    private BasicBullet _bullet;
-    private Transform[] _shootPoints;
-    private InstantiateBulletProvider _provider;
-
-    public BurstOfShellsAttack(BasicBullet bullet, Transform[] shootPoints, InstantiateBulletProvider provider)
+    public class BurstOfShellsAttack : IAttackable
     {
-        _bullet = bullet;
-        _shootPoints = shootPoints;
-        _provider = provider;
-    }
+        //Animator
+        //Coroutine
+        private BasicBullet _bullet;
+        private Transform[] _shootPoints;
+        private InstantiateBulletProvider _provider;
 
-    public void Attack()
-    {
-        foreach (var shootPoint in _shootPoints)
+        public BurstOfShellsAttack(BasicBullet bullet, Transform[] shootPoints, InstantiateBulletProvider provider)
         {
-            _provider.Instantiate(_bullet, shootPoint);
+            _bullet = bullet;
+            _shootPoints = shootPoints;
+            _provider = provider;
+        }
+
+        public void Attack()
+        {
+            foreach (var shootPoint in _shootPoints)
+            {
+                _provider.Instantiate(_bullet, shootPoint);
+            }
         }
     }
 }

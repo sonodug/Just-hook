@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+namespace Entities.Player
 {
-    [SerializeField] private PlayerMovementController _controller;
-    [SerializeField] private float _runSpeed = 10.0f;
-
-    private Vector3 _movementVector
+    public class PlayerMovement : MonoBehaviour
     {
-        get
+        [SerializeField] private PlayerMovementController _controller;
+        [SerializeField] private float _runSpeed = 10.0f;
+
+        private Vector3 _movementVector
         {
-            float directionX = Input.GetAxisRaw("Horizontal");
-            float directionY = Input.GetAxisRaw("Vertical");
+            get
+            {
+                float directionX = Input.GetAxisRaw("Horizontal");
+                float directionY = Input.GetAxisRaw("Vertical");
 
-            return new Vector3(directionX, 0.0f, 0.0f);
+                return new Vector3(directionX, 0.0f, 0.0f);
+            }
         }
-    }
 
-    private void FixedUpdate()
-    {
-        _controller.Move(_runSpeed, (Vector2)_movementVector);
+        private void FixedUpdate()
+        {
+            _controller.Move(_runSpeed, (Vector2)_movementVector);
+        }
     }
 }

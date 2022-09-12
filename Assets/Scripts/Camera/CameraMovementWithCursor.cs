@@ -1,71 +1,76 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities.Player;
 using UnityEngine;
-using UnityEngine.Events;
 using Zenject;
 
-public class CameraMovementWithCursor : MonoBehaviour
+namespace CameraScripts
 {
-    [Inject] private Player _player;
-
-    [SerializeField] private float _dragSpeed;
-
-    [SerializeField] private float _leftBound;
-    [SerializeField] private float _rightBound;
-    [SerializeField] private float _bottomBound;
-    [SerializeField] private float _topBound;    
-
-    private Vector3 _dragOrigin;
-    private Camera _camera;
-
-    public float CurrentLeftBound => _leftBound + _player.transform.position.x;
-    public float CurrentRightBound => _rightBound + _player.transform.position.x;
-    public float CurrentBottomBound => _bottomBound + _player.transform.position.y;
-    public float CurrentTopBound => _topBound + _player.transform.position.y;
-
-    private void Start()
+    public class CameraMovementWithCursor : MonoBehaviour
     {
-        _camera = GetComponent<Camera>();
-    }
+        [Inject] private Player _player;
 
-    private void Update()
-    {
-        ListenCameraDrag();
-    }
+        [SerializeField] private float _dragSpeed;
 
-    private void ListenCameraDrag()
-    {
-        if (Input.GetMouseButtonDown(0))
+        [SerializeField] private float _leftBound;
+        [SerializeField] private float _rightBound;
+        [SerializeField] private float _bottomBound;
+        [SerializeField] private float _topBound;    
+
+        private Vector3 _dragOrigin;
+        private Camera _camera;
+
+        public float CurrentLeftBound => _leftBound + _player.transform.position.x;
+        public float CurrentRightBound => _rightBound + _player.transform.position.x;
+        public float CurrentBottomBound => _bottomBound + _player.transform.position.y;
+        public float CurrentTopBound => _topBound + _player.transform.position.y;
+
+        private void Start()
         {
-            _dragOrigin = _camera.ScreenToWorldPoint(Input.mousePosition);
+            _camera = GetComponent<Camera>();
         }
 
-        if (Input.GetMouseButton(0))
+        private void Update()
         {
-            Vector3 difference = _dragOrigin - _camera.ScreenToWorldPoint(Input.mousePosition);
-            //_camera.transform.position += difference;
-
-            _camera.transform.position = Vector3.Lerp(transform.position, transform.position + difference, Time.deltaTime * _dragSpeed);
-
-            _camera.transform.position = 
-                new Vector3
-                (
-                    Mathf.Clamp(_camera.transform.position.x, CurrentLeftBound, CurrentRightBound),
-                    Mathf.Clamp(_camera.transform.position.y, CurrentBottomBound, CurrentTopBound),
-                    transform.position.z
-                );
+            ListenCameraDrag();
         }
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (_player != null)
+        private void ListenCameraDrag()
         {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentTopBound), new Vector2(CurrentRightBound, CurrentTopBound));
-            Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentBottomBound), new Vector2(CurrentRightBound, CurrentBottomBound));
-            Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentTopBound), new Vector2(CurrentLeftBound, CurrentBottomBound));
-            Gizmos.DrawLine(new Vector2(CurrentRightBound, CurrentTopBound), new Vector2(CurrentRightBound, CurrentBottomBound));
+            if (Input.GetMouseButtonDown(0))
+            {
+                _dragOrigin = _camera.ScreenToWorldPoint(Input.mousePosition);
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                Vector3 difference = _dragOrigin - _camera.ScreenToWorldPoint(Input.mousePosition);
+                //_camera.transform.position += difference;
+
+                var position = transform.position;
+                var cameraPosition = _camera.transform.position;
+                
+                cameraPosition = Vector3.Lerp(position, position + difference, Time.deltaTime * _dragSpeed);
+
+                cameraPosition = 
+                    new Vector3
+                    (
+                        Mathf.Clamp(cameraPosition.x, CurrentLeftBound, CurrentRightBound),
+                        Mathf.Clamp(cameraPosition.y, CurrentBottomBound, CurrentTopBound),
+                        position.z
+                    );
+                _camera.transform.position = cameraPosition;
+            }
+        }
+
+        private void OnDrawGizmos()
+        {
+            if (_player != null)
+            {
+                Gizmos.color = Color.cyan;
+                Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentTopBound), new Vector2(CurrentRightBound, CurrentTopBound));
+                Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentBottomBound), new Vector2(CurrentRightBound, CurrentBottomBound));
+                Gizmos.DrawLine(new Vector2(CurrentLeftBound, CurrentTopBound), new Vector2(CurrentLeftBound, CurrentBottomBound));
+                Gizmos.DrawLine(new Vector2(CurrentRightBound, CurrentTopBound), new Vector2(CurrentRightBound, CurrentBottomBound));
+            }
         }
     }
 }

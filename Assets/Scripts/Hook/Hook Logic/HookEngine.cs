@@ -1,4 +1,5 @@
 using System;
+using Entities.Player;
 using UnityEngine;
 using UnityEngine.Events;
 using Zenject;
@@ -158,7 +159,7 @@ public abstract class HookEngine : MonoBehaviour
         Rigidbody.velocity = Vector2.zero;
     }
 
-    public void OnHookHolderDied()
+    private void OnHookHolderDied()
     {
         DisableWithoutMoving();
     }

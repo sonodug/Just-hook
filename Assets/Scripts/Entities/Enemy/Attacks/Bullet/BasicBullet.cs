@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities.Player;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class BasicBullet : Bullet
+public class BasicBullet : global::Bullet
 {
     private void Update()
     {

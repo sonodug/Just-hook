@@ -1,78 +1,81 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities.Enemy.Attacks;
+using Entities.Enemy.DyingPolicies;
 using UnityEngine;
 
-[RequireComponent(typeof(InstantiateBulletProvider))]
-public class WallMountedStaticTurret : Enemy
+namespace Entities.Enemy.Enemies.WallMountedStaticTurret
 {
-    [SerializeField] private Bullet _bulletTemplate;
-    [SerializeField] private WeaponRotator _weaponRotator;
-    [SerializeField] private Transform _shootPoint;
-    [SerializeField] private float _health;
-    [SerializeField] private float _observeRadius;
-    [SerializeField] private float _delayBetweenShots;
-
-    private EnemyEnvironment _enemy;
-    private Health _eventHealth;
-    private float _delay;
-    private InstantiateBulletProvider _provider;
-
-    private void Awake()
+    [RequireComponent(typeof(InstantiateBulletProvider))]
+    public class WallMountedStaticTurret : global::Enemy
     {
-        _enemy = GetComponent<EnemyEnvironment>();
-        _provider = GetComponent<InstantiateBulletProvider>();
+        [SerializeField] private Bullet _bulletTemplate;
+        [SerializeField] private WeaponRotator _weaponRotator;
+        [SerializeField] private Transform _shootPoint;
+        [SerializeField] private float _health;
+        [SerializeField] private float _observeRadius;
+        [SerializeField] private float _delayBetweenShots;
 
-        InitBehaviours();
-    }
+        private EnemyEnvironment _enemy;
+        private Health _eventHealth;
+        private float _delay;
+        private InstantiateBulletProvider _provider;
 
-    private void Update()
-    {
-        _delay += Time.deltaTime;
-
-        if (Vector3.Distance(transform.position, Target.gameObject.transform.position) < _observeRadius)
+        private void Awake()
         {
-            _weaponRotator.RotateWeapon(Target.gameObject.transform.position);
+            _enemy = GetComponent<EnemyEnvironment>();
+            _provider = GetComponent<InstantiateBulletProvider>();
 
-            if (_delay >= _delayBetweenShots)
+            InitBehaviours();
+        }
+
+        private void Update()
+        {
+            _delay += Time.deltaTime;
+
+            if (Vector3.Distance(transform.position, Target.gameObject.transform.position) < _observeRadius)
             {
-                Attackable.Attack();
-                _delay = 0;
+                _weaponRotator.RotateWeapon(Target.gameObject.transform.position);
+
+                if (_delay >= _delayBetweenShots)
+                {
+                    Attackable.Attack();
+                    _delay = 0;
+                }
             }
         }
-    }
 
-    private void OnEnable()
-    {
-        _enemy.HookConnected += OnHookConnected;
-        _eventHealth.Died += OnDied;
-    }
+        private void OnEnable()
+        {
+            _enemy.HookConnected += OnHookConnected;
+            _eventHealth.Died += OnDied;
+        }
 
-    private void OnDisable()
-    {
-        _enemy.HookConnected -= OnHookConnected;
-        _eventHealth.Died -= OnDied;
-    }
+        private void OnDisable()
+        {
+            _enemy.HookConnected -= OnHookConnected;
+            _eventHealth.Died -= OnDied;
+        }
 
-    protected override void InitBehaviours()
-    {
-        _eventHealth = new Health(new NormalDyingPolicy(), _health);
-        Health = _eventHealth;
-        Attackable = new ShootTargetWithInterval(_bulletTemplate, _shootPoint, _provider, Target);
-    }
+        protected override void InitBehaviours()
+        {
+            _eventHealth = new Health(new NormalDyingPolicy(), _health);
+            Health = _eventHealth;
+            Attackable = new ShootTargetWithInterval(_bulletTemplate, _shootPoint, _provider, Target);
+        }
 
-    private void OnHookConnected()
-    {
-        Health.ApplyDamage(Target.Damage);
-    }
+        private void OnHookConnected()
+        {
+            Health.ApplyDamage(Target.Damage);
+        }
 
-    protected override void OnDied()
-    {
-        gameObject.SetActive(false);
-    }
+        protected override void OnDied()
+        {
+            gameObject.SetActive(false);
+        }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _observeRadius);
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, _observeRadius);
+        }
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Entities.Player;
 using UnityEngine;
 using Zenject;
 
@@ -9,6 +10,7 @@ public class HealthView : MonoBehaviour
     [Inject] private Player _player;
 
     [SerializeField] private List<HealthModel> _healthModels;
+    [SerializeField] private float _transitionDelay;
 
     private int _index;
 
@@ -52,9 +54,9 @@ public class HealthView : MonoBehaviour
     }
 
 
-    public async Task Delay()
+    private async Task Delay()
     {
-        for (float a = 0f; a <= 1f; a += 0.01f)
+        for (float a = 0f; a <= _transitionDelay; a += 0.02f)
         {
             await Task.Yield();
         }

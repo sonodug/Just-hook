@@ -1,61 +1,69 @@
-using System.Collections;
-using System.Collections.Generic;
+using Entities.Enemy.Attacks;
+using Entities.Enemy.DyingPolicies;
 using UnityEngine;
 
-[RequireComponent(typeof(PatrolMovement))]
-public class PatrolEnemy : Enemy
+namespace Entities.Enemy.Enemies
 {
-    [SerializeField] private float _health;
-    [SerializeField] private float _damage;
-
-    private PatrolMovement _movement;
-    private EnemyEnvironment _enemy;
-    private Health _eventHealth;
-
-    private void Awake()
+    [RequireComponent(typeof(PatrolMovement))]
+    public class PatrolEnemy : global::Enemy
     {
-        _movement = GetComponent<PatrolMovement>();
-        _enemy = GetComponent<EnemyEnvironment>();
+        [SerializeField] private float _health;
+        [SerializeField] private float _damage;
 
-        InitBehaviours();
-    }
+        private PatrolMovement _movement;
+        private EnemyEnvironment _enemy;
+        private Health _eventHealth;
 
-    private void OnEnable()
-    {
-        _enemy.HookConnected += OnHookConnected;
-        _eventHealth.Died += OnDied;
-    }
-
-    private void OnDisable()
-    {
-        _enemy.HookConnected -= OnHookConnected;
-        _eventHealth.Died -= OnDied;
-    }
-
-    protected override void InitBehaviours()
-    {
-        _eventHealth = new Health(new NormalDyingPolicy(), _health);
-
-        Health = _eventHealth;
-        Attackable = new BasicNearAttack(_damage, Target);
-        Movement = _movement;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        private void Awake()
         {
-            Attackable.Attack();
+            _movement = GetComponent<PatrolMovement>();
+            _enemy = GetComponent<EnemyEnvironment>();
+
+            InitBehaviours();
         }
-    }
 
-    private void OnHookConnected()
-    {
-        Health.ApplyDamage(Target.Damage);
-    }
+        private void OnEnable()
+        {
+            _enemy.HookConnected += OnHookConnected;
+            _eventHealth.Died += OnDied;
+        }
 
-    protected override void OnDied()
-    {
-        gameObject.SetActive(false);
+        private void OnDisable()
+        {
+            _enemy.HookConnected -= OnHookConnected;
+            _eventHealth.Died -= OnDied;
+        }
+
+        protected override void InitBehaviours()
+        {
+            _eventHealth = new Health(new NormalDyingPolicy(), _health);
+
+            Health = _eventHealth;
+            Attackable = new BasicNearAttack(_damage, Target);
+            Movement = _movement;
+        }
+
+        private void OnCollisionEnter2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent<Player.Player>(out Player.Player player))
+            {
+                Attackable.Attack();
+            }
+        }
+
+        private void OnHookConnected()
+        {
+            Health.ApplyDamage(Target.Damage);
+        }
+
+        protected override void OnDied()
+        {
+            foreach (var trigger in Triggers)
+            {
+                trigger.OpenPass();
+            }
+            
+            gameObject.SetActive(false);
+        }
     }
 }

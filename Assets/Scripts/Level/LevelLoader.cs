@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using IJunior.TypedScenes;
+using Progress_Zones;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 using Zenject.SpaceFighter;
+using Player = Entities.Player.Player;
 
 public class LevelLoader : MonoBehaviour
 {
@@ -41,8 +43,6 @@ public class LevelLoader : MonoBehaviour
     private void OnLevelScoreChanged()
     {
         _gemsCollectedAmount++;
-
-
 
         if (_gemsCollectedAmount == _levelConfig.GemsCollectToFinish)
         {

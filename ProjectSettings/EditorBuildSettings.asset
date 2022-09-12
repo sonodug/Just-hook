@@ -5,39 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/Scenes/MainScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 0
-    path: Assets/Scenes/ScenePhysics.unity
-    guid: 40a541015fb40fc4d8ed84d0b0a7017d
-  - enabled: 1
-    path: Assets/Scenes/Demo_Level1.unity
-    guid: 96faabf97ce50124ea87abb73ed7451a
-  - enabled: 1
-    path: Assets/Scenes/Demo_Level2.unity
-    guid: e852ab7efda9172409a449733680693c
-  - enabled: 1
-    path: Assets/Scenes/Demo_Level4.unity
-    guid: 87fe65490f2d40344aba965c6b4a8e52
-  - enabled: 1
-    path: Assets/Scenes/Demo_Level3.unity
-    guid: 4e38d914c0635434f86474426356141e
   - enabled: 1
     path: Assets/Scenes/Demo_Level5.unity
     guid: d7da06cc51139be43919c79a7557120f
   - enabled: 1
-<<<<<<< HEAD
-    path: Assets/Pluginz/TypedScenes/Samples/SampleScene.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
-=======
-    path: Assets/AssetsPackages/Free 2D Cartoon Parallax Background/Demo/Scenes/Demo_Scene.unity
-    guid: 8fb833954f68e2640842680d0cc08b4d
-  - enabled: 1
-    path: Assets/AssetsPackages/Cainos/Pixel Art Platformer - Village Props/Scene/SC_Demo_Scene___Village_Props.unity
-    guid: b2b3364ed59327f42a6caee487f51132
-  - enabled: 1
-    path: Assets/AssetsPackages/Free 2D Adventure Beach Pack/Example/Example.unity
-    guid: f3afbda7d8a7dae43880676326c10922
->>>>>>> dev
+    path: Assets/Scenes/TriggerZone_test.unity
+    guid: 1007455cef5e95e47a93b851e9ad5cd0
   m_configObjects: {}

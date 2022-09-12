@@ -1,34 +1,45 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
+using Entities.Player;
 using UnityEngine;
 
-public class TriggerZone : MonoBehaviour
+namespace Progress_Zones
 {
-    [SerializeField] private GameObject _triggerPass;
-    [SerializeField] private GameObject _triggerObject;
-
-    private BoxCollider2D _boxCollider;
-
-    private void Start()
+    //zone affected barriers)
+    public class TriggerZone : MonoBehaviour
     {
-        _triggerPass.SetActive(false);
+        [SerializeField] private BoxCollider2D _optionallyTriggerColider;
 
-        if (_triggerObject.TryGetComponent<Enemy>(out Enemy enemy))
+        private void Start()
         {
-
+            if (_optionallyTriggerColider != null)
+            {
+                for (int i = 0; i < transform.childCount; i++)
+                {
+                    transform.GetChild(i).gameObject.SetActive(false);
+                }
+            }
         }
-    }
 
-    private void Update()
-    {
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        private void OnTriggerEnter2D(Collider2D col)
         {
-            _triggerPass.SetActive(true);
-            _boxCollider.enabled = false;
+            _optionallyTriggerColider.enabled = false;
+            LockPass();
+        }
+
+        public void OpenPass()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        private void LockPass()
+        {
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                transform.GetChild(i).gameObject.SetActive(true);
+            }
         }
     }
 }

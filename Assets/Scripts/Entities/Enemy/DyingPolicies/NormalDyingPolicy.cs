@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class NormalDyingPolicy : IDyingPolicy
+namespace Entities.Enemy.DyingPolicies
 {
-    public bool Died(float health)
+    public class NormalDyingPolicy : IDyingPolicy
     {
-        return health <= 0;
+        public bool Died(float health)
+        {
+            return health <= 0;
+        }
     }
 }

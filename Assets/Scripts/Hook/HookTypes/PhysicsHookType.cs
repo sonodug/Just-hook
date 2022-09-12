@@ -1,12 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PhysicsHookType : HookEngine
 {
     [SerializeField] private float _frequency;
     [SerializeField] private float _distance;
-
+    
     public override void Grapple()
     {
         SpringJoint2D.connectedAnchor = GrapplePoint;
