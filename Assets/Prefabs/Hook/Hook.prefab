@@ -266,7 +266,7 @@ GameObject:
   - component: {fileID: 7488869179821478588}
   - component: {fileID: 6027849925590829848}
   - component: {fileID: 1421380826100092225}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: Hook
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -622,6 +622,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
+      propertyPath: _launchSpeed
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
+      propertyPath: _lerpingTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7578014169515693376, guid: 1d69b6ac06afd2046abf50a9b5ad5f82, type: 3}
       propertyPath: _maxDistance
       value: 8
       objectReference: {fileID: 0}
@@ -663,12 +671,20 @@ PrefabInstance:
       value: TransporterHookType
       objectReference: {fileID: 0}
     - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
+      propertyPath: _launchSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
+      propertyPath: _lerpingTime
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _maxDistance
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _transportSpeed
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4762849788626430048, guid: 00042c36f06c30a42b3aec484cbb01de, type: 3}
       propertyPath: _environmentTracker

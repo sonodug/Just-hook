@@ -12,6 +12,7 @@ namespace Entities.Player
         [SerializeField] private float _healthCount;
         [SerializeField] private float _damage;
         [SerializeField] private float _diedDelayTransition;
+        [SerializeField] private float _invulnerabilityTime;
 
         private Rigidbody2D _rigidbody;
         private float _maxHealth;
@@ -20,6 +21,8 @@ namespace Entities.Player
         private int _gemsCollectToFinish; //GameManager should initialize this and others values
 
         private SpriteRenderer _renderer;
+
+        private CircleCollider2D _collider;
 
         public float Damage => _damage;
 
@@ -40,7 +43,8 @@ namespace Entities.Player
         private void Start()
         {
             _renderer = GetComponent<SpriteRenderer>();
-
+            _collider = GetComponent<CircleCollider2D>();
+            
             //DontDestroyOnLoad(gameObject);
             _maxHealth = _healthCount;
         }
@@ -53,7 +57,10 @@ namespace Entities.Player
 
                 if (gem.enabled == true)
                     LevelScoreChanged?.Invoke();
-            
+
+                if (gem.OptionallyTrigger != null)
+                    gem.OptionallyTrigger.OpenPass();
+                
                 gem.gameObject.SetActive(false);
                 gem.enabled = false;
             }
@@ -72,7 +79,7 @@ namespace Entities.Player
                 await Fade();
                 //HealthChanged?.Invoke(0, _maxHealth);
                 Died?.Invoke();
-                await Delay();
+                await Delay(1f);
                 _rigidbody.constraints = RigidbodyConstraints2D.None;
                 _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
             }
@@ -90,15 +97,18 @@ namespace Entities.Player
                 await Fade();
                 //HealthChanged?.Invoke(0, _maxHealth);
                 Died?.Invoke();
-                await Delay();
+                await Delay(1f);
                 _rigidbody.constraints = RigidbodyConstraints2D.None;
                 _rigidbody.constraints = RigidbodyConstraints2D.FreezeRotation;
                 
                 _healthCount = _maxHealth;
-                
             }
             else
             {
+                // _collider.enabled = false;
+                // await Delay(_invulnerabilityTime);
+                // _collider.enabled = true;
+                
                 _rigidbody.AddForce(new Vector2(Random.Range(-1, 1), 1) * 200);
             }
         }
@@ -129,9 +139,9 @@ namespace Entities.Player
             }
         }
         
-        private async Task Delay()
+        private async Task Delay(float time)
         {
-            for (float a = 0f; a <= 1f; a += 0.005f)
+            for (float a = 0f; a <= time; a += 0.005f)
             {
                 await Task.Yield();
             }

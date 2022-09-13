@@ -1,11 +1,14 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Entities.Player;
 using UnityEngine;
+using Zenject;
 
 public class FollowerMovement : MonoBehaviour, IMovable
 {
-    [SerializeField] private Transform _target;
+    [Inject] private Player _target;
+    
     [SerializeField] private float _speed;
     [Range(1, 10)] [SerializeField] private float _observeRadius;
 
@@ -19,7 +22,7 @@ public class FollowerMovement : MonoBehaviour, IMovable
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, _target.position) < _observeRadius)
+        if (Vector3.Distance(transform.position, _target.gameObject.transform.position) < _observeRadius)
         {
             Move();
         }
@@ -36,10 +39,8 @@ public class FollowerMovement : MonoBehaviour, IMovable
     {
         _spriteRenderer.color = Color.red;
 
-        if (_tween == null)
-        {
-            _tween = transform.DOMove(new Vector3(_target.position.x, transform.position.y, 0), 50.0f / _speed).SetAutoKill(true);
-        }
+        _tween ??= transform.DOMove(new Vector3(_target.gameObject.transform.position.x, transform.position.y, 0),
+            50.0f / _speed).SetAutoKill(true);
     }
 
     private void OnDrawGizmosSelected()

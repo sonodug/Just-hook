@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7650690939572464852}
-  m_Layer: 7
+  m_Layer: 0
   m_Name: HookPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,6 +225,7 @@ MonoBehaviour:
   _healthCount: 3
   _damage: 5
   _diedDelayTransition: 1
+  _invulnerabilityTime: 2
 --- !u!114 &2538139406949681946
 MonoBehaviour:
   m_ObjectHideFlags: 0

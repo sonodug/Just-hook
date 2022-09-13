@@ -22,8 +22,11 @@ namespace Progress_Zones
 
         private void OnTriggerEnter2D(Collider2D col)
         {
-            _optionallyTriggerColider.enabled = false;
-            LockPass();
+            if (col.gameObject.TryGetComponent<Player>(out Player player))
+            {
+                _optionallyTriggerColider.enabled = false;
+                LockPass();
+            }
         }
 
         public void OpenPass()

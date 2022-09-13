@@ -69,6 +69,11 @@ namespace Entities.Enemy.Enemies.WallMountedStaticTurret
 
         protected override void OnDied()
         {
+            foreach (var trigger in Triggers)
+            {
+                trigger.OpenPass();
+            }
+            
             gameObject.SetActive(false);
         }
 
