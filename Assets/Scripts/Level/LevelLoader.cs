@@ -15,7 +15,6 @@ public class LevelLoader : MonoBehaviour
 
     [SerializeField] private LevelConfigurator _levelConfig;
     [SerializeField] private Transform _startControlPoint;
-    [SerializeField] private float _playerDieTransitionSpeed;
 
     //levelInfo
     private int _gemsCollectedAmount;

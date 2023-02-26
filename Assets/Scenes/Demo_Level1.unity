@@ -23347,6 +23347,14 @@ PrefabInstance:
       propertyPath: _target
       value: 
       objectReference: {fileID: 1070120307}
+    - target: {fileID: 2646695751329316121, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 1070120307}
+    - target: {fileID: 4413265186971548566, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
+      propertyPath: _target
+      value: 
+      objectReference: {fileID: 1723269951}
     - target: {fileID: 5139463531602204242, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -23394,6 +23402,14 @@ PrefabInstance:
     - target: {fileID: 5139463531602204247, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
       propertyPath: m_Name
       value: Main Camera
+      objectReference: {fileID: 0}
+    - target: {fileID: 5139463533144941244, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
+      propertyPath: _levelConfigurator
+      value: 
+      objectReference: {fileID: 11400000, guid: 0dbf1d9790839bc418a3b5c2339ab44a, type: 2}
+    - target: {fileID: 5387913022386594933, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
+      propertyPath: _transitionDelay
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7795748264135026808, guid: e48a731f2e997344d9af02ba5ae26bca, type: 3}
       propertyPath: _target
